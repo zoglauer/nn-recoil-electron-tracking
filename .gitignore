@@ -1,3 +1,9 @@
+# Added by Andreas
+*.sim
+*.sim.gz
+python-env/
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

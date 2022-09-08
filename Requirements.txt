@@ -1,0 +1,13 @@
+# Required software
+
+# tensorflow -- installed via setup.sh
+# torch -- installed via setup.sh
+# rootpy -- installed via setup.sh
+
+pyyaml
+sklearn
+scipy
+matplotlib
+jupyterlab
+networkx
+
