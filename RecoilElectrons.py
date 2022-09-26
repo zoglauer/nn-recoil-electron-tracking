@@ -53,7 +53,7 @@ YBins = 64
 ZBins = 64
 
 # File names
-FileName = "RecoilElectrons.10k.v2.data"
+FileName = "data\\RecoilElectrons.10k.data"
 
 # Depends on GPU memory and layout
 BatchSize = 64
@@ -84,7 +84,7 @@ OutputDirectory = "Results"
 
 
 parser = argparse.ArgumentParser(description='Perform training and/or testing of the event clustering machine learning tools.')
-parser.add_argument('-f', '--filename', default='RecoilElectrons.10k.v2.data', help='File name with training/testing data')
+parser.add_argument('-f', '--filename', default='data\\RecoilElectrons.10k.data', help='File name with training/testing data')
 parser.add_argument('-m', '--maxevents', default=MaxEvents, help='Maximum number of events to use')
 parser.add_argument('-s', '--testingtrainingsplit', default=TestingTrainingSplit, help='Testing-training split')
 parser.add_argument('-b', '--batchsize', default=BatchSize, help='Batch size')
@@ -110,7 +110,7 @@ if int(args.batchsize) >= 1:
 else:
   print("Warning: Minimum batch size is 1")
   BatchSize = 1
-  
+
 if float(args.testingtrainingsplit) >= 0.05:
    TestingTrainingSplit = float(args.testingtrainingsplit)
 else:
@@ -120,7 +120,7 @@ else:
 CPUOnly = False
 if args.cpuonly == True:
   CPUOnly = True
-  os.environ["CUDA_VISIBLE_DEVICES"]="-1"   
+  os.environ["CUDA_VISIBLE_DEVICES"]="-1"
 
 Layout = args.layout
 if not Layout == "original" and not Layout == "andreas":
@@ -225,14 +225,14 @@ print("Info: Setting up neural network...")
 
 if Layout == "original":
   print("Info: Using \"original\" neural network layout")
-  
+
   gpus = tf.config.experimental.list_physical_devices('GPU')
   if gpus:
     try:
       tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=6144)])
     except RuntimeError as e:
       print(e)
-  
+
   Model = models.Sequential()
   Model.add(layers.Conv3D(32, (3, 3, 3), activation='relu', input_shape=(XBins, YBins, ZBins, 1)))
   Model.add(layers.MaxPooling3D((2, 2, 3)))
@@ -242,17 +242,17 @@ if Layout == "original":
   Model.add(layers.Flatten())
   Model.add(layers.Dense(64, activation='relu'))
   Model.add(layers.Dense(OutputDataSpaceSize))
-  
+
 elif Layout == "andreas":
   print("Info: Using \"andreas\" neural network layout")
-  
+
   gpus = tf.config.experimental.list_physical_devices('GPU')
   if gpus:
     try:
       tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=8192)])
     except RuntimeError as e:
       print(e)
-  
+
   Model = models.Sequential()
   Model.add(layers.Conv3D(32, (3, 3, 3), activation='relu', input_shape=(XBins, YBins, ZBins, 1), padding="SAME"))
   Model.add(layers.BatchNormalization())
@@ -275,7 +275,7 @@ else:
 
 
 Model.compile(optimizer=tf.keras.optimizers.Adam(), loss=tf.keras.losses.MeanSquaredError(), metrics=['mse'])
-    
+
 Model.summary()
 
 
@@ -344,16 +344,16 @@ def CheckPerformance():
 
     for e in range(0, BatchSize):
       Event = TestingDataSets[e + Batch*BatchSize]
-      
+
       oPos = np.array([ Event.TrackRealStartX, Event.TrackRealStartY, Event.TrackRealStartZ ])
       rPos = np.array([ Result[e][0], Result[e][1], Result[e][2] ])
-      
+
       oDir = np.array([ Event.TrackRealDirectionX, Event.TrackRealDirectionY, Event.TrackRealDirectionZ ])
       rDir = np.array([ Result[e][3], Result[e][4], Result[e][5] ])
-      
+
       # Distance difference location:
       DistDiff = np.linalg.norm(oPos - rPos)
-      
+
       # Angle difference direction
       Norm = np.linalg.norm(oDir)
       if Norm == 0:
@@ -369,8 +369,8 @@ def CheckPerformance():
 
       if math.isnan(AngleDiff):
         continue
-      
-      
+
+
       # Found closest start
       MinDist = 1000000
       MinPos = 0
@@ -379,11 +379,11 @@ def CheckPerformance():
         if np.linalg.norm(hPos - rPos) < MinDist:
           MinDist = np.linalg.norm(hPos - rPos)
           MinPos = h
-      
+
       # The first one is always the correct start:
       if MinPos == 0:
         SumStartCorrect += 1
-      
+
       SumDistDiff += DistDiff
       SumAngleDiff += AngleDiff
       TotalEvents += 1
@@ -432,7 +432,7 @@ while Iteration < MaxIterations:
   # Step 1: Loop over all training batches
   for Batch in range(0, NTrainingBatches):
     print("Batch {} / {}".format(Batch+1, NTrainingBatches))
-    
+
     # Step 1.1: Convert the data set into the input and output tensor
     TimerConverting = time.time()
 
@@ -450,7 +450,7 @@ while Iteration < MaxIterations:
         ZBin = int( (Event.Z[h] - ZMin) / ((ZMax - ZMin) / ZBins) )
         if XBin >= 0 and YBin >= 0 and ZBin >= 0 and XBin < XBins and YBin < YBins and ZBin < ZBins:
           InputTensor[g][XBin][YBin][ZBin][0] = Event.E[h]
-      
+
       OutputTensor[g][0] = Event.TrackRealStartX
       OutputTensor[g][1] = Event.TrackRealStartY
       OutputTensor[g][2] = Event.TrackRealStartZ
