@@ -51,9 +51,9 @@ print("============================\n")
 # Default parameters
 
 # X, Y, Z bins
-XBins = 120
-YBins = 120
-ZBins = 120
+XBins = 172
+YBins = 172
+ZBins = 172
 
 # File names
 FileName = "data\\RecoilElectrons.10k.data"
@@ -244,28 +244,37 @@ if 1 == 1:
   c1_xy = layers.Conv2D(1024, (3, 3), activation='relu', padding="same")
   c1norm_xy = layers.BatchNormalization()
   c1b_xy = layers.MaxPooling2D((2, 2))
-  c2_xy = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
+  c2_xy = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
   c2norm_xy = layers.BatchNormalization()
   c2b_xy = layers.MaxPooling2D((2, 2))
-  c3_xy = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
+  c3_xy = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
+  c3norm_xy = layers.BatchNormalization()
+  c3b_xy = layers.MaxPooling2D((2, 2))
+  c4_xy = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
 
 
 
   c1_yz = layers.Conv2D(1024, (3, 3), activation='relu', padding="same")
   c1norm_yz = layers.BatchNormalization()
   c1b_yz = layers.MaxPooling2D((2, 2))
-  c2_yz = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
+  c2_yz = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
   c2norm_yz = layers.BatchNormalization()
   c2b_yz = layers.MaxPooling2D((2, 2))
-  c3_yz = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
+  c3_yz = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
+  c3norm_yz = layers.BatchNormalization()
+  c3b_yz = layers.MaxPooling2D((2, 2))
+  c4_yz = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
 
   c1_zx = layers.Conv2D(1024, (3, 3), activation='relu', padding="same")
   c1norm_zx = layers.BatchNormalization()
   c1b_zx = layers.MaxPooling2D((2, 2))
-  c2_zx = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
+  c2_zx = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
   c2norm_zx = layers.BatchNormalization()
   c2b_zx = layers.MaxPooling2D((2, 2))
-  c3_zx = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
+  c3_zx = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
+  c3norm_zx = layers.BatchNormalization()
+  c3b_zx = layers.MaxPooling2D((2, 2))
+  c4_zx = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
 
   d1 = layers.Dense(512, activation='relu', kernel_regularizer='l1')
   d2 = layers.Dense(256, activation='relu', kernel_regularizer='l1')
@@ -277,19 +286,22 @@ if 1 == 1:
   _xy = inputs_xy
   _xy = c1b_xy(drop(c1_xy(_xy)))
   _xy = c2b_xy(drop(c2_xy(_xy)))
-  _xy = drop(c3_xy(_xy))
+  _xy = c3b_xy(drop(c3_xy(_xy)))
+  _xy = drop(c4_xy(_xy))
   _xy = layers.Flatten()(_xy)
 
   _yz = inputs_yz
   _yz = c1b_yz(drop(c1_yz(_yz)))
   _yz = c2b_yz(drop(c2_yz(_yz)))
-  _yz = drop(c3_yz(_yz))
+  _yz = c3b_yz(drop(c3_yz(_yz)))
+  _yz = drop(c4_yz(_yz))
   _yz = layers.Flatten()(_yz)
 
   _zx = inputs_zx
   _zx = c1b_zx(drop(c1_zx(_zx)))
   _zx = c2b_zx(drop(c2_zx(_zx)))
-  _zx = drop(c3_zx(_zx))
+  _zx = c3b_zx(drop(c3_zx(_zx)))
+  _zx = drop(c4_zx(_zx))
   _zx = layers.Flatten()(_zx)
 
   merge = concatenate([_xy, _yz, _zx])
