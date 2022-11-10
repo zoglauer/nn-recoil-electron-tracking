@@ -253,7 +253,6 @@ if 1 == 1:
   c4_xy = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
 
 
-
   c1_yz = layers.Conv2D(1024, (3, 3), activation='relu', padding="same")
   c1norm_yz = layers.BatchNormalization()
   c1b_yz = layers.MaxPooling2D((2, 2))
@@ -275,6 +274,7 @@ if 1 == 1:
   c3norm_zx = layers.BatchNormalization()
   c3b_zx = layers.MaxPooling2D((2, 2))
   c4_zx = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
+
 
   d1 = layers.Dense(512, activation='relu', kernel_regularizer='l1')
   d2 = layers.Dense(256, activation='relu', kernel_regularizer='l1')
@@ -306,10 +306,10 @@ if 1 == 1:
 
   merge = concatenate([_xy, _yz, _zx])
 
-  merge  = d1(merge)
-  merge  = d2(merge)
-  merge  = d3(merge)
-  merge  = d4(merge)
+  merge = d1(merge)
+  merge = d2(merge)
+  merge = d3(merge)
+  merge = d4(merge)
 
 
 

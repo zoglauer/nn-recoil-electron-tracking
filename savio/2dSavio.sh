@@ -7,7 +7,7 @@
 #SBATCH -J Python
 
 #SBATCH --account=fc_cosi
-#SBATCH --partition=savio2_gpu
+#SBATCH --partition=savio3_gpu
 #SBATCH --qos=savio_normal
 
 #SBATCH -t 24:00:00
@@ -38,7 +38,7 @@ module load ml/tensorflow/2.5.0-py37 python/3.7
 echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
-python3 -u RecoilElectrons.py -f /global/home/groups/fc_cosi/Data/RecoilElectronTracking/RecoilElectrons.100k.data
+python3 -u RecoilElectrons.py -f /global/home/groups/fc_cosi/Data/RecoilElectronTracking/data/RecoilElectrons.100k.data
 
 echo "Waiting for all processes to end..."
 wait
