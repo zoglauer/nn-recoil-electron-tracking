@@ -9,6 +9,8 @@
 #SBATCH --account=fc_cosi
 #SBATCH --partition=savio3_gpu
 
+#SBATCH --qos=gtx2080_gpu3_normal 
+
 #SBATCH -t 24:00:00
 
 #SBATCH --nodes=1
