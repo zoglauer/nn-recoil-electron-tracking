@@ -56,7 +56,7 @@ YBins = 172
 ZBins = 172
 
 # File names
-FileName = "data\\RecoilElectrons.10k.data"
+FileName = "data\\RecoilElectrons.100k.data"
 
 # Depends on GPU memory and layout
 BatchSize = 128
@@ -87,7 +87,7 @@ OutputDirectory = "Results"
 
 
 parser = argparse.ArgumentParser(description='Perform training and/or testing of the event clustering machine learning tools.')
-parser.add_argument('-f', '--filename', default='data\\RecoilElectrons.10k.data', help='File name with training/testing data')
+parser.add_argument('-f', '--filename', default='data\\RecoilElectrons.100k.data', help='File name with training/testing data')
 parser.add_argument('-m', '--maxevents', default=MaxEvents, help='Maximum number of events to use')
 parser.add_argument('-s', '--testingtrainingsplit', default=TestingTrainingSplit, help='Testing-training split')
 parser.add_argument('-b', '--batchsize', default=BatchSize, help='Batch size')
@@ -236,9 +236,9 @@ if 1 == 1:
     except RuntimeError as e:
       print(e)
 
-  inputs_xy = keras.Input(shape=(120,120,1))
-  inputs_yz = keras.Input(shape=(120,120,1))
-  inputs_zx = keras.Input(shape=(120,120,1))
+  inputs_xy = keras.Input(shape=(172,172,1))
+  inputs_yz = keras.Input(shape=(172,172,1))
+  inputs_zx = keras.Input(shape=(172,172,1))
 
 
   c1_xy = layers.Conv2D(1024, (3, 3), activation='relu', padding="same")
