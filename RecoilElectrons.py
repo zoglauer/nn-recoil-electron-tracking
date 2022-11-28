@@ -241,7 +241,7 @@ if 1 == 1:
   inputs_zx = keras.Input(shape=(170,170,1))
 
 
-  c1_xy = layers.Conv2D(1012, (3, 3), activation='relu', padding="same")
+  c1_xy = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
   c1norm_xy = layers.BatchNormalization()
   c1b_xy = layers.MaxPooling2D((2, 2))
   c2_xy = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
@@ -253,7 +253,7 @@ if 1 == 1:
   c4_xy = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
 
 
-  c1_yz = layers.Conv2D(1012, (3, 3), activation='relu', padding="same")
+  c1_yz = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
   c1norm_yz = layers.BatchNormalization()
   c1b_yz = layers.MaxPooling2D((2, 2))
   c2_yz = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
@@ -264,7 +264,7 @@ if 1 == 1:
   c3b_yz = layers.MaxPooling2D((2, 2))
   c4_yz = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
 
-  c1_zx = layers.Conv2D(1012, (3, 3), activation='relu', padding="same")
+  c1_zx = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
   c1norm_zx = layers.BatchNormalization()
   c1b_zx = layers.MaxPooling2D((2, 2))
   c2_zx = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
