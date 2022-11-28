@@ -59,7 +59,7 @@ ZBins = 172
 FileName = "data\\RecoilElectrons.100k.data"
 
 # Depends on GPU memory and layout
-BatchSize = 128
+BatchSize = 16
 
 # Split between training and testing data
 TestingTrainingSplit = 0.1
