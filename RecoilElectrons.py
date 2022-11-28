@@ -236,9 +236,9 @@ if 1 == 1:
     except RuntimeError as e:
       print(e)
 
-  inputs_xy = keras.Input(shape=(172,172,1))
-  inputs_yz = keras.Input(shape=(172,172,1))
-  inputs_zx = keras.Input(shape=(172,172,1))
+  inputs_xy = keras.Input(shape=(120,120,1))
+  inputs_yz = keras.Input(shape=(120,120,1))
+  inputs_zx = keras.Input(shape=(120,120,1))
 
 
   c1_xy = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
