@@ -38,7 +38,7 @@ module load ml/tensorflow/2.5.0-py37 python/3.7
 echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
-python3 -u RecoilElectrons.py -f /global/home/groups/fc_cosi/Data/RecoilElectronTracking/RecoilElectrons.10k.data
+python3 -u RecoilElectrons.py -f /global/home/groups/fc_cosi/Data/RecoilElectronTracking/RecoilElectrons.500k.v2.data 
 
 echo "Waiting for all processes to end..."
 wait
