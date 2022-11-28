@@ -18,6 +18,7 @@
 #SBATCH --gres=gpu:1
 #SBATCH --gres=gpu:TITAN:1
 
+#SBATCH --qos=savio_lowprio
 #SBATCH --signal=2@60
 
 # --> CHANGE TO YOUR EMAIL
