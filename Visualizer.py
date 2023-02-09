@@ -25,7 +25,6 @@ def save_pred_projections(data: EventData, pred_vec=[0, 0, 0, 0, 0, 0], save_fil
     axs[1, 1].remove()
     axs[1, 1] = fig.add_subplot(2, 2, 4, projection='3d')
     axs[1, 1].set_title('3d Projection')
-    #axs[1, 1].d
 
     for i in range(len(data.E)): 
         axs[0, 0].scatter(data.X[i],data.Y[i],color='b') 
