@@ -84,7 +84,7 @@ OutputDirectory = "Results"
 
 
 parser = argparse.ArgumentParser(description='Perform training and/or testing of the event clustering machine learning tools.')
-parser.add_argument('-f', '--filename', default='data/RecoilElectrons.10k.v2.data', help='File name with training/testing data')
+parser.add_argument('-f', '--filename', default='data/RecoilElectrons.100k.data', help='File name with training/testing data')
 parser.add_argument('-m', '--maxevents', default=MaxEvents, help='Maximum number of events to use')
 parser.add_argument('-s', '--testingtrainingsplit', default=TestingTrainingSplit, help='Testing-training split')
 parser.add_argument('-b', '--batchsize', default=BatchSize, help='Batch size')
