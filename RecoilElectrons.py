@@ -53,7 +53,7 @@ YBins = 64
 ZBins = 64
 
 # File names
-FileName = "RecoilElectrons.10k.v2.data"
+FileName = "RecoilElectrons.10k.data"
 
 # Depends on GPU memory and layout
 BatchSize = 64
@@ -84,7 +84,7 @@ OutputDirectory = "Results"
 
 
 parser = argparse.ArgumentParser(description='Perform training and/or testing of the event clustering machine learning tools.')
-parser.add_argument('-f', '--filename', default='RecoilElectrons.10k.v2.data', help='File name with training/testing data')
+parser.add_argument('-f', '--filename', default='data/RecoilElectrons.10k.v2.data', help='File name with training/testing data')
 parser.add_argument('-m', '--maxevents', default=MaxEvents, help='Maximum number of events to use')
 parser.add_argument('-s', '--testingtrainingsplit', default=TestingTrainingSplit, help='Testing-training split')
 parser.add_argument('-b', '--batchsize', default=BatchSize, help='Batch size')
@@ -123,8 +123,8 @@ if args.cpuonly == True:
   os.environ["CUDA_VISIBLE_DEVICES"]="-1"   
 
 Layout = args.layout
-if not Layout == "original" and not Layout == "andreas":
-  print("Error: The neural network layout must be one of [original, andreas], and not: {}".format(Layout))
+if not Layout == "original" and not Layout == "andreas" and not Layout == 'proj':
+  print("Error: The neural network layout must be one of [original, andreas, proj], and not: {}".format(Layout))
   sys.exit(0)
 
 #if os.path.exists(OutputDirectory):
@@ -269,6 +269,41 @@ elif Layout == "andreas":
   Model.add(layers.Flatten())
   Model.add(layers.Dense(12, activation='relu'))
   Model.add(layers.Dense(OutputDataSpaceSize))
+
+elif Layout == 'proj':
+  print("Info: Using \"proj\" neural network layout")
+  
+  gpus = tf.config.experimental.list_physical_devices('GPU')
+  if gpus:
+    try:
+      tf.config.experimental.set_virtual_device_configuration(gpus[0], [tf.config.experimental.VirtualDeviceConfiguration(memory_limit=8192)])
+    except RuntimeError as e:
+      print(e)
+  
+  Model = models.Sequential()
+  Model.add(layers.Conv3D(32, (3, 3, 3), activation='relu', input_shape=(XBins, YBins, ZBins, 1), padding="SAME"))
+  Model.add(layers.BatchNormalization())
+  Model.add(layers.MaxPooling3D((2, 2, 2)))
+  Model.add(layers.Conv3D(128, (3, 3, 3), activation='relu', padding="SAME"))
+  #Model.add(layers.BatchNormalization())
+  Model.add(layers.MaxPooling3D((2, 2, 2)))
+  Model.add(layers.Conv3D(512, (3, 3, 3), activation='relu', padding="SAME"))
+  #Model.add(layers.BatchNormalization())
+  Model.add(layers.MaxPooling3D((2, 2, 2)))
+  Model.add(layers.Conv3D(1024, (3, 3, 3), activation='relu', padding="SAME"))
+  #Model.add(layers.BatchNormalization())
+  Model.add(layers.MaxPooling3D((2, 2, 2)))
+  Model.add(layers.Conv3D(1024, (3, 3, 3), activation='relu', padding="SAME"))
+  Model.add(layers.MaxPooling3D((2, 2, 2)))
+  Model.add(layers.Conv3D(1024, (3, 3, 3), activation='relu', padding="SAME"))
+  Model.add(layers.MaxPooling3D((2, 2, 2)))
+  Model.add(layers.Conv3D(1024, (3, 3, 3), activation='relu', padding="SAME"))
+  Model.add(layers.MaxPooling3D((2, 2, 2)))
+  Model.add(layers.Conv3D(1024, (3, 3, 3), activation='relu', padding="SAME"))
+  Model.add(layers.Flatten())
+  Model.add(layers.Dense(12, activation='relu'))
+  Model.add(layers.Dense(OutputDataSpaceSize))
+
 else:
   print("Error: Unknown model: {}".format(Layout))
   sys.exit(0)
