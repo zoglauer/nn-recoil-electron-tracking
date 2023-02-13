@@ -59,7 +59,7 @@ ZBins = 170
 FileName = "data\\RecoilElectrons.100k.data"
 
 # Depends on GPU memory and layout
-BatchSize = 8
+BatchSize = 128
 
 # Split between training and testing data
 TestingTrainingSplit = 0.1
@@ -236,84 +236,20 @@ if 1 == 1:
     except RuntimeError as e:
       print(e)
 
-  inputs_xy = keras.Input(shape=(170,170,1))
-  inputs_yz = keras.Input(shape=(170,170,1))
-  inputs_zx = keras.Input(shape=(170,170,1))
-
-
-  c1_xy = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
-  c1norm_xy = layers.BatchNormalization()
-  c1b_xy = layers.MaxPooling2D((2, 2))
-  c2_xy = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
-  c2norm_xy = layers.BatchNormalization()
-  c2b_xy = layers.MaxPooling2D((2, 2))
-  c3_xy = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
-  c3norm_xy = layers.BatchNormalization()
-  c3b_xy = layers.MaxPooling2D((2, 2))
-  c4_xy = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
-
-
-  c1_yz = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
-  c1norm_yz = layers.BatchNormalization()
-  c1b_yz = layers.MaxPooling2D((2, 2))
-  c2_yz = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
-  c2norm_yz = layers.BatchNormalization()
-  c2b_yz = layers.MaxPooling2D((2, 2))
-  c3_yz = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
-  c3norm_yz = layers.BatchNormalization()
-  c3b_yz = layers.MaxPooling2D((2, 2))
-  c4_yz = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
-
-  c1_zx = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
-  c1norm_zx = layers.BatchNormalization()
-  c1b_zx = layers.MaxPooling2D((2, 2))
-  c2_zx = layers.Conv2D(512, (3, 3), activation='relu', padding="same")
-  c2norm_zx = layers.BatchNormalization()
-  c2b_zx = layers.MaxPooling2D((2, 2))
-  c3_zx = layers.Conv2D(256, (3, 3), activation='relu', padding="same")
-  c3norm_zx = layers.BatchNormalization()
-  c3b_zx = layers.MaxPooling2D((2, 2))
-  c4_zx = layers.Conv2D(128, (3, 3), activation='relu', padding="same")
-
-
-  d1 = layers.Dense(512, activation='relu', kernel_regularizer='l1')
-  d2 = layers.Dense(256, activation='relu', kernel_regularizer='l1')
-  d3 = layers.Dense(128, activation='relu', kernel_regularizer='l1')
-  d4 = layers.Dense(86)
-
-  drop = layers.Dropout(0.0)
-
-  _xy = inputs_xy
-  _xy = c1b_xy(drop(c1_xy(_xy)))
-  _xy = c2b_xy(drop(c2_xy(_xy)))
-  _xy = c3b_xy(drop(c3_xy(_xy)))
-  _xy = drop(c4_xy(_xy))
-  _xy = layers.Flatten()(_xy)
-
-  _yz = inputs_yz
-  _yz = c1b_yz(drop(c1_yz(_yz)))
-  _yz = c2b_yz(drop(c2_yz(_yz)))
-  _yz = c3b_yz(drop(c3_yz(_yz)))
-  _yz = drop(c4_yz(_yz))
-  _yz = layers.Flatten()(_yz)
-
-  _zx = inputs_zx
-  _zx = c1b_zx(drop(c1_zx(_zx)))
-  _zx = c2b_zx(drop(c2_zx(_zx)))
-  _zx = c3b_zx(drop(c3_zx(_zx)))
-  _zx = drop(c4_zx(_zx))
-  _zx = layers.Flatten()(_zx)
-
-  merge = concatenate([_xy, _yz, _zx])
-
-  merge = d1(merge)
-  merge = d2(merge)
-  merge = d3(merge)
-  merge = d4(merge)
-
-
-
-  Model = keras.Model(inputs=[inputs_xy, inputs_yz, inputs_zx], outputs=merge)
+  Model = models.Sequential()
+  Model.add(layers.Dense(128, input_dim = 15 * 4))
+  Model.add(layers.Dense(258, activation='relu'))
+  Model.add(layers.Dense(512, activation='relu'))
+  Model.add(layers.Dense(1024, activation='relu'))
+  Model.add(layers.Dense(2056, activation='relu'))
+  Model.add(layers.Dense(4102, activation='relu'))
+  Model.add(layers.Dense(4000, activation='relu'))
+  Model.add(layers.Dense(2056, activation='relu'))
+  Model.add(layers.Dense(2056, activation='relu'))
+  Model.add(layers.Dense(1024, activation='relu'))
+  Model.add(layers.Dense(128, activation='relu'))
+  Model.add(layers.Dense(64, activation='relu'))
+  Model.add(layers.Dense(OutputDataSpaceSize))
 
 elif Layout == "andreas":
   print("Info: Using \"andreas\" neural network layout")
@@ -387,9 +323,7 @@ def CheckPerformance():
   for Batch in range(0, NTestingBatches):
 
     # Step 1.1: Convert the data set into the input and output tensor
-    xyInput = np.zeros(shape=(BatchSize, XBins, YBins, 1))
-    yzInput = np.zeros(shape=(BatchSize, XBins, YBins, 1))
-    zxInput = np.zeros(shape=(BatchSize, XBins, YBins, 1))
+    InputTensor = np.zeros(shape=(BatchSize, 15 * 4))
     OutputTensor = np.zeros(shape=(BatchSize, 6))
     # Loop over all testing  data sets and add them to the tensor
     for e in range(0, BatchSize):
@@ -397,15 +331,17 @@ def CheckPerformance():
       # Set the layer in which the event happened
 
       # Set all the hit locations and energies
+      p = 0
       for h in range(0, len(Event.X)):
-        XBin = int((Event.X[h] - XMin) / ((XMax - XMin) / XBins) )
-        YBin = int((Event.Y[h] - YMin) / ((YMax - YMin) / YBins) )
-        ZBin = int((Event.Z[h] - ZMin) / ((ZMax - ZMin) / ZBins) )
-        #print("hit z bin: {} {}".format(Event.Z[h], ZBin))
-        if XBin >= 0 and YBin >= 0 and ZBin >= 0 and XBin < XBins and YBin < YBins and ZBin < ZBins:
-          xyInput[e][XBin][YBin][0] = Event.E[h]
-          yzInput[e][YBin][ZBin][0] = Event.E[h]
-          zxInput[e][ZBin][XBin][0] = Event.E[h]
+        XBin = int( (Event.X[h] - XMin) / ((XMax - XMin) / XBins) )
+        YBin = int( (Event.Y[h] - YMin) / ((YMax - YMin) / YBins) )
+        ZBin = int( (Event.Z[h] - ZMin) / ((ZMax - ZMin) / ZBins) )
+        if XBin >= 0 and YBin >= 0 and ZBin >= 0 and XBin < XBins and YBin < YBins and ZBin < ZBins and len(Event.X) < 16:
+          InputTensor[e][4 * p] = XBin
+          InputTensor[e][4 * p + 1] = YBin
+          InputTensor[e][4 * p + 2] = ZBin
+          InputTensor[e][4 * p + 3] = Event.E[h]
+          p += 1
 
       OutputTensor[e][0] = Event.TrackRealStartX
       OutputTensor[e][1] = Event.TrackRealStartY
@@ -415,10 +351,10 @@ def CheckPerformance():
       OutputTensor[e][5] = Event.TrackRealDirectionZ
 
 
-    print(Model.predict([xyInput[:1], yzInput[:1], zxInput[:1]]), OutputTensor[:1])
+
     # Step 2: Run it
     # Result = Session.run(Output, feed_dict={X: InputTensor})
-    Result = Model.predict([xyInput, yzInput, zxInput])
+    Result = Model.predict(InputTensor)
 
     #print(Result[e])
     #print(OutputTensor[e])
@@ -471,6 +407,7 @@ def CheckPerformance():
 
 
       # Some debugging
+
       if Batch == 0 and e < 50:
         EventID = e + Batch*BatchSize + NTrainingBatches*BatchSize
         print("\nEvent {}:".format(EventID))
@@ -478,7 +415,6 @@ def CheckPerformance():
 
         print("Positions: {} vs {} -> {} cm difference".format(oPos, rPos, DistDiff))
         print("Directions: {} vs {} -> {} degree difference".format(oDir, rDir, AngleDiff))
-
   if TotalEvents > 0:
     if SumDistDiff / TotalEvents < BestLocation and SumAngleDiff / TotalEvents < BestAngle:
       BestLocation = SumDistDiff / TotalEvents
@@ -517,24 +453,29 @@ while Iteration < MaxIterations:
     # Step 1.1: Convert the data set into the input and output tensor
     TimerConverting = time.time()
 
-    InputTensor = np.zeros(shape=(BatchSize, 3, XBins, YBins, 1))
+    InputTensor = np.zeros(shape=(BatchSize, 15 * 4))
     OutputTensor = np.zeros(shape=(BatchSize, 6))
-    xyInput = np.zeros(shape=(BatchSize, XBins, YBins, 1))
-    yzInput = np.zeros(shape=(BatchSize, XBins, YBins, 1))
-    zxInput = np.zeros(shape=(BatchSize, XBins, YBins, 1))
     # Loop over all training data sets and add them to the tensor
+
     for g in range(0, BatchSize):
       Event = TrainingDataSets[g + Batch*BatchSize]
 
       # Set all the hit locations and energies
+      p = 0
       for h in range(0, len(Event.X)):
         XBin = int( (Event.X[h] - XMin) / ((XMax - XMin) / XBins) )
         YBin = int( (Event.Y[h] - YMin) / ((YMax - YMin) / YBins) )
         ZBin = int( (Event.Z[h] - ZMin) / ((ZMax - ZMin) / ZBins) )
-        if XBin >= 0 and YBin >= 0 and ZBin >= 0 and XBin < XBins and YBin < YBins and ZBin < ZBins:
-          xyInput[g][XBin][YBin][0] = Event.E[h]
-          yzInput[g][YBin][ZBin][0] = Event.E[h]
-          zxInput[g][ZBin][XBin][0] = Event.E[h]
+        if XBin >= 0 and YBin >= 0 and ZBin >= 0 and XBin < XBins and YBin < YBins and ZBin < ZBins and len(Event.X) < 16:
+          InputTensor[g][4 * p] = XBin
+          InputTensor[g][4 * p + 1] = YBin
+          InputTensor[g][4 * p + 2] = ZBin
+          InputTensor[g][4 * p + 3] = Event.E[h]
+          p += 1
+
+      copy = InputTensor[g][:4 * p]
+      random.shuffle(copy)
+      InputTensor[g][:4 * p] = copy
 
       OutputTensor[g][0] = Event.TrackRealStartX
       OutputTensor[g][1] = Event.TrackRealStartY
@@ -548,8 +489,8 @@ while Iteration < MaxIterations:
 
     # Step 1.2: Perform the actual training
     TimerTraining = time.time()
-    History = Model.fit([xyInput, yzInput, zxInput], OutputTensor)
-    print(Model.predict([xyInput[0:1], yzInput[:1], zxInput[:1]]), OutputTensor[:1])
+    History = Model.fit(InputTensor, OutputTensor)
+    print(Model.predict(InputTensor[:1]), OutputTensor[:1])
     Loss = History.history['loss'][-1]
     TimeTraining += time.time() - TimerTraining
 
@@ -588,4 +529,3 @@ while Iteration < MaxIterations:
 
 
 #input("Press [enter] to EXIT")
-sys.exit(0)

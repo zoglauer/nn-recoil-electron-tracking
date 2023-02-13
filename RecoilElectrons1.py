@@ -279,7 +279,7 @@ if 1 == 1:
   d1 = layers.Dense(512, activation='relu', kernel_regularizer='l1')
   d2 = layers.Dense(256, activation='relu', kernel_regularizer='l1')
   d3 = layers.Dense(128, activation='relu', kernel_regularizer='l1')
-  d4 = layers.Dense(86)
+  d4 = layers.Dense(6)
 
   drop = layers.Dropout(0.0)
 
