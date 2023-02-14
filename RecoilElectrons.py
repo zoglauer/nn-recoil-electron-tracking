@@ -440,7 +440,7 @@ while Iteration < MaxIterations:
     OutputTensor = np.zeros(shape=(BatchSize, OutputDataSpaceSize))
 
     # Loop over all training data sets and add them to the tensor
-    for g in range(Batch * BatchSize, (Batch + 1) * BatchSize):
+    for g in range(Batch * BatchSize, (Batch + 1) * BatchSize-1):
       Event = TrainingDataSets[g + Batch*BatchSize]
 
       # Set all the hit locations and energies
