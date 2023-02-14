@@ -343,14 +343,15 @@ def CheckPerformance():
     #print(OutputTensor[e])
 
     for e in range(Batch * BatchSize, (Batch + 1) * BatchSize-1):
-      print(e)
+      index = e - Batch * BatchSize
+      
       Event = TestingDataSets[e + Batch*BatchSize]
       
       oPos = np.array([ Event.TrackRealStartX, Event.TrackRealStartY, Event.TrackRealStartZ ])
-      rPos = np.array([ Result[e][0], Result[e][1], Result[e][2] ])
+      rPos = np.array([ Result[index][0], Result[index][1], Result[index][2] ])
       
       oDir = np.array([ Event.TrackRealDirectionX, Event.TrackRealDirectionY, Event.TrackRealDirectionZ ])
-      rDir = np.array([ Result[e][3], Result[e][4], Result[e][5] ])
+      rDir = np.array([ Result[index][3], Result[index][4], Result[index][5] ])
       
       # Distance difference location:
       DistDiff = np.linalg.norm(oPos - rPos)
