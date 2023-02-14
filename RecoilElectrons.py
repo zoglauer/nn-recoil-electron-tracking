@@ -53,7 +53,7 @@ YBins = 64
 ZBins = 64
 
 # File names
-FileName = "RecoilElectrons.10k.data"
+FileName = "data/RecoilElectrons.100k.data"
 
 # Depends on GPU memory and layout
 BatchSize = 64
@@ -84,7 +84,7 @@ OutputDirectory = "Results"
 
 
 parser = argparse.ArgumentParser(description='Perform training and/or testing of the event clustering machine learning tools.')
-parser.add_argument('-f', '--filename', default='data/RecoilElectrons.100k.data', help='File name with training/testing data')
+parser.add_argument('-f', '--filename', default=FileName, help='File name with training/testing data')
 parser.add_argument('-m', '--maxevents', default=MaxEvents, help='Maximum number of events to use')
 parser.add_argument('-s', '--testingtrainingsplit', default=TestingTrainingSplit, help='Testing-training split')
 parser.add_argument('-b', '--batchsize', default=BatchSize, help='Batch size')
@@ -123,8 +123,8 @@ if args.cpuonly == True:
   os.environ["CUDA_VISIBLE_DEVICES"]="-1"   
 
 Layout = args.layout
-if not Layout == "original" and not Layout == "andreas" and not Layout == 'proj':
-  print("Error: The neural network layout must be one of [original, andreas, proj], and not: {}".format(Layout))
+if not Layout == "original" and not Layout == "andreas":
+  print("Error: The neural network layout must be one of [original, andreas], and not: {}".format(Layout))
   sys.exit(0)
 
 #if os.path.exists(OutputDirectory):
@@ -269,7 +269,6 @@ elif Layout == "andreas":
   Model.add(layers.Flatten())
   Model.add(layers.Dense(12, activation='relu'))
   Model.add(layers.Dense(OutputDataSpaceSize))
-
 else:
   print("Error: Unknown model: {}".format(Layout))
   sys.exit(0)
@@ -343,7 +342,7 @@ def CheckPerformance():
     #print(Result[e])
     #print(OutputTensor[e])
 
-    for e in range(0, BatchSize):
+    for e in range(Batch * BatchSize, (Batch + 1) * BatchSize):
       Event = TestingDataSets[e + Batch*BatchSize]
       
       oPos = np.array([ Event.TrackRealStartX, Event.TrackRealStartY, Event.TrackRealStartZ ])
@@ -431,7 +430,7 @@ while Iteration < MaxIterations:
   print("\n\nStarting iteration {}".format(Iteration))
 
   # Step 1: Loop over all training batches
-  for Batch in range(0, NTrainingBatches):
+  for Batch in range(0, 150):
     print("Batch {} / {}".format(Batch+1, NTrainingBatches))
     
     # Step 1.1: Convert the data set into the input and output tensor
@@ -441,7 +440,7 @@ while Iteration < MaxIterations:
     OutputTensor = np.zeros(shape=(BatchSize, OutputDataSpaceSize))
 
     # Loop over all training data sets and add them to the tensor
-    for g in range(BatchSize * Batch, (BatchSize) * (Batch+1)):
+    for g in range(Batch * BatchSize, (Batch + 1) * BatchSize):
       Event = TrainingDataSets[g + Batch*BatchSize]
 
       # Set all the hit locations and energies
@@ -450,15 +449,16 @@ while Iteration < MaxIterations:
         YBin = int( (Event.Y[h] - YMin) / ((YMax - YMin) / YBins) )
         ZBin = int( (Event.Z[h] - ZMin) / ((ZMax - ZMin) / ZBins) )
         if XBin >= 0 and YBin >= 0 and ZBin >= 0 and XBin < XBins and YBin < YBins and ZBin < ZBins:
-          InputTensor[g][XBin][YBin][ZBin][0] = Event.E[h]
-      
-      OutputTensor[g][0] = Event.TrackRealStartX
-      OutputTensor[g][1] = Event.TrackRealStartY
-      OutputTensor[g][2] = Event.TrackRealStartZ
 
-      OutputTensor[g][3] = Event.TrackRealDirectionX
-      OutputTensor[g][4] = Event.TrackRealDirectionY
-      OutputTensor[g][5] = Event.TrackRealDirectionZ
+          InputTensor[g - Batch * BatchSize][XBin][YBin][ZBin][0] = Event.E[h]
+      
+      OutputTensor[g - Batch * BatchSize][0] = Event.TrackRealStartX
+      OutputTensor[g - Batch * BatchSize][1] = Event.TrackRealStartY
+      OutputTensor[g - Batch * BatchSize][2] = Event.TrackRealStartZ
+
+      OutputTensor[g - Batch * BatchSize][3] = Event.TrackRealDirectionX
+      OutputTensor[g - Batch * BatchSize][4] = Event.TrackRealDirectionY
+      OutputTensor[g - Batch * BatchSize][5] = Event.TrackRealDirectionZ
 
     TimeConverting += time.time() - TimerConverting
 
@@ -469,6 +469,7 @@ while Iteration < MaxIterations:
     History = Model.fit(InputTensor, OutputTensor, validation_split=0.1)
     Loss = History.history['loss'][-1]
     TimeTraining += time.time() - TimerTraining
+    Model.save(f'model{Batch}.bin')
 
     if Interrupted == True: break
 
