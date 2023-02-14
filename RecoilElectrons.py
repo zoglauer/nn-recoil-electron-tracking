@@ -342,7 +342,7 @@ def CheckPerformance():
     #print(Result[e])
     #print(OutputTensor[e])
 
-    for e in range(Batch * BatchSize, (Batch + 1) * BatchSize):
+    for e in range(Batch * BatchSize, (Batch + 1) * BatchSize-1):
       Event = TestingDataSets[e + Batch*BatchSize]
       
       oPos = np.array([ Event.TrackRealStartX, Event.TrackRealStartY, Event.TrackRealStartZ ])
@@ -469,7 +469,6 @@ while Iteration < MaxIterations:
     History = Model.fit(InputTensor, OutputTensor, validation_split=0.1)
     Loss = History.history['loss'][-1]
     TimeTraining += time.time() - TimerTraining
-    Model.save(f'model{Batch}.bin')
 
     if Interrupted == True: break
 
@@ -484,6 +483,7 @@ while Iteration < MaxIterations:
     TimesNoImprovement = 0
 
     print("\nFound new best model and performance!")
+    Model.save(f'model{Iteration}.bin')
   else:
     TimesNoImprovement += 1
 
