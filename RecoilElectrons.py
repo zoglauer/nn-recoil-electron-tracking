@@ -343,6 +343,7 @@ def CheckPerformance():
     #print(OutputTensor[e])
 
     for e in range(Batch * BatchSize, (Batch + 1) * BatchSize-1):
+      print(e)
       Event = TestingDataSets[e + Batch*BatchSize]
       
       oPos = np.array([ Event.TrackRealStartX, Event.TrackRealStartY, Event.TrackRealStartZ ])
