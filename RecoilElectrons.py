@@ -345,7 +345,7 @@ def CheckPerformance():
     for e in range(Batch * BatchSize, (Batch + 1) * BatchSize-1):
       index = e - Batch * BatchSize
       
-      Event = TestingDataSets[e + Batch*BatchSize]
+      Event = TestingDataSets[e]
       
       oPos = np.array([ Event.TrackRealStartX, Event.TrackRealStartY, Event.TrackRealStartZ ])
       rPos = np.array([ Result[index][0], Result[index][1], Result[index][2] ])
