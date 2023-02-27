@@ -42,6 +42,8 @@ cd interaction_network
 
 pip install --user torch
 pip install --user torch_geometric
+pip install --user torch_sparse
+
 python3 train.py
 
 echo "Waiting for all processes to end..."
