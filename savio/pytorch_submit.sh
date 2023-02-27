@@ -39,6 +39,8 @@ echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
 source activate torch_env_2
+pip install --user pyg_lib torch_scatter torch_sparse -f https://data.pyg.org/whl/torch-${TORCH}+${CUDA}.html
+pip install --user torch-geometric
 cd interaction_network
 
 python3 train.py
