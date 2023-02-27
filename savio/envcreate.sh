@@ -34,9 +34,8 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 echo "Loading modules..."
 module purge
 module load python
-conda create --name=torch_env_2 python=3.9
+conda create --name=torch_env_2 python=3.10 numpy
 conda install torch
-conda install 
 conda install torch_geometric
 conda install torch_sparse
 
