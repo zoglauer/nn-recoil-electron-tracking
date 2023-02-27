@@ -58,9 +58,9 @@ class InteractionNetwork(MessagePassing):
         super(InteractionNetwork, self).__init__(aggr='add', 
                                                  flow='source_to_target')
         # x, y, z, e, x, y, z, e, delta pos
-        self.R1 = RelationalModel(9, 4, hidden_size)
+        self.R1 = RelationalModel(10, 4, hidden_size)
         self.O = ObjectModel(8, 3, hidden_size)
-        self.R2 = RelationalModel(10, 169, hidden_size)
+        self.R2 = RelationalModel(10, 1, hidden_size)
         self.E: Tensor = Tensor()
 
     def forward(self, x: Tensor, edge_index: Tensor, edge_attr: Tensor) -> Tensor:

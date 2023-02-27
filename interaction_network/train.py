@@ -21,7 +21,8 @@ def train(args, model, device, train_loader, optimizer, epoch):
         data = data.to(device)
         optimizer.zero_grad()
         output = model(data.x, data.edge_index, data.edge_attr)
-        y, output = data.y, output[0]
+        #print(data.x.size(), data.edge_attr.size(), data.edge_index.size(), output.size())
+        y, output = data.y, output
         loss = F.binary_cross_entropy(output, y, reduction='mean')
         loss.backward()
         optimizer.step()
@@ -44,7 +45,7 @@ def validate(model, device, val_loader):
         output = model(data.x, data.edge_index, data.edge_attr)
         #print(data.x.size(), data.edge_index.size(), data.edge_attr.size(), output.size())
         #print(data.edge_attr)
-        y, output = data.y, output[0]
+        y, output = data.y, output
         loss = F.binary_cross_entropy(output, y, reduction='mean').item()
         
         # define optimal threshold (thld) where TPR = TNR 
@@ -83,7 +84,7 @@ def test(model, device, test_loader, thld=0.5):
             FN = torch.sum((data.y==1).squeeze() & 
                            (output<thld).squeeze()).item()            
             acc = (TP+TN)/(TP+TN+FP+FN)
-            loss = F.binary_cross_entropy(output.squeeze(1)[0], data.y, 
+            loss = F.binary_cross_entropy(output, data.y, 
                                           reduction='mean').item()
             accs.append(acc)
             losses.append(loss)

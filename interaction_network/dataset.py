@@ -42,25 +42,27 @@ class GraphDataset(Dataset):
     def get(self, idx):
         event = self.event_list[idx]
         N = len(event.E)
-        E = N*(N-1)//2
+        E = N*(N-1)
 
         permutation = [i for i in range(N)]
         random.shuffle(permutation)
 
-        X = torch.zeros((MAX_HITPOINTS, 4))
-        y = torch.zeros((MAX_HITPOINTS, MAX_HITPOINTS))
+        X = torch.zeros((N, 4))
+        y = torch.zeros((E, 1))
         edge_index = torch.zeros((2, E), dtype=torch.int64)
-        edge_attr = torch.zeros((E, 1)) # just use euclidean dist explicitly for now
+        edge_attr = torch.zeros((E, 2)) # just use euclidean dist, energy diff for now
 
         c = 0
         for i in range(N):
-            for j in range(i+1, N):
+            for j in range(N):
                 if i != j:
                     edge_index[0][c] = i
                     edge_index[1][c] = j
-                    edge_attr[c] = euclidean_dist(event, permutation[i], permutation[j])
+                    edge_attr[c][0] = euclidean_dist(event, permutation[i], permutation[j])
+                    edge_attr[c][1] = event.E[permutation[i]]-event.E[permutation[j]]
                     c += 1
 
+        c = 0
         for i in range(N):
             X[i][0] = event.X[permutation[i]]
             X[i][1] = event.Y[permutation[i]]
@@ -68,10 +70,15 @@ class GraphDataset(Dataset):
             X[i][3] = event.E[permutation[i]]
 
             for j in range(N):
+                if i == j:
+                    continue
                 if permutation[j] == permutation[i] + 1:
-                    y[i][j] = 1
+                    y[c] = 1
+                else:
+                    y[c] = 0
+                c += 1
         
-        return Data(x=X, edge_index=edge_index, edge_attr=edge_attr, y=torch.tensor(y.reshape((169, ))))
+        return Data(x=X, edge_index=edge_index, edge_attr=edge_attr, y=y)
 
 
 
