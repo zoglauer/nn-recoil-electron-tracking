@@ -39,6 +39,7 @@ echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
 source activate torch_env_2
+cd interaction_network
 
 python3 train.py
 
