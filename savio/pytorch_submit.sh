@@ -38,7 +38,7 @@ module load ml/torch/torch7 python/3.7
 echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
-source activate torch_env
+source activate torch_env_2
 
 python3 train.py
 
