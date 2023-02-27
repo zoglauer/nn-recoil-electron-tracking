@@ -38,11 +38,7 @@ module load ml/torch/torch7 python/3.7
 echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
-cd interaction_network
-
-pip install --user torch
-pip install --user torch_geometric
-pip install --user torch_sparse
+source activate torch_env
 
 python3 train.py
 
