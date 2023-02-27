@@ -40,8 +40,8 @@ echo "Starting execution..."
 # --> ADAPT THE FILENAME
 cd interaction_network
 
-pip install torch
-pip install torch_geometric
+conda install torch
+conda install torch_geometric
 python3 train.py
 
 echo "Waiting for all processes to end..."
