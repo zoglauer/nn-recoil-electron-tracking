@@ -80,6 +80,12 @@ def main():
     print(f"Final Results:")
     print(f"Correctly predicted paths: {correct_paths / num_samples}")
     print(f"Average dot product: {avg_path_accuracy / num_samples}")
+    """
+    Last Run gave:
+    Final Results:
+    Correctly predicted paths: 0.5622
+    Average dot product: 0.7498354315757751
+    """
 
 if __name__ == '__main__':
     main()
