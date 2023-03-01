@@ -38,21 +38,6 @@ class ObjectModel(nn.Module):
     def forward(self, C):
         return self.layers(C)
 
-class SimpleNetwork(nn.Module):
-    def __init__(self):
-        super(SimpleNetwork, self).__init__()
-
-        self.layers = nn.Sequential(
-            nn.Linear(13, 100),
-            nn.ReLU(),
-            nn.Linear(100, 200),
-            nn.ReLU(),
-            nn.Linear(200, 169),
-        )
-    
-    def forward(self, x):
-        return self.layers(x)
-
 class InteractionNetwork(MessagePassing):
     def __init__(self, hidden_size):
         super(InteractionNetwork, self).__init__(aggr='add', 

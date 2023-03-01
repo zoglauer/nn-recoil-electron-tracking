@@ -95,7 +95,6 @@ def test(model, device, test_loader, thld=0.5):
     return np.mean(losses), np.mean(accs)
 
 def main():
-
     # Training settings
     parser = argparse.ArgumentParser(description='PyG Interaction Network Implementation')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',
@@ -104,7 +103,7 @@ def main():
                         help='input batch size for testing (default: 1000)')
     parser.add_argument('--epochs', type=int, default=14, metavar='N',
                         help='number of epochs to train (default: 14)')
-    parser.add_argument('--lr', type=float, default=1.0, metavar='LR',
+    parser.add_argument('--lr', type=float, default=0.001, metavar='LR',
                         help='learning rate (default: 1.0)')
     parser.add_argument('--gamma', type=float, default=0.7, metavar='M',
                         help='Learning rate step gamma (default: 0.7)')
@@ -116,25 +115,16 @@ def main():
                         help='disables CUDA training')
     parser.add_argument('--dry-run', action='store_true', default=False,
                         help='quickly check a single pass')
-    parser.add_argument('--seed', type=int, default=1, metavar='S',
-                        help='random seed (default: 1)')
     parser.add_argument('--log-interval', type=int, default=1000, metavar='N',
                         help='how many batches to wait before logging training status')
     parser.add_argument('--save-model', action='store_true', default=True,
                         help='For Saving the current Model')
-    parser.add_argument('--construction', type=str, default='heptrkx_classic',
-                        help='graph construction method')
-    parser.add_argument('--sample', type=int, default=1, 
-                        help='TrackML train_{} sample to train on')
     parser.add_argument('--hidden-size', type=int, default=40,
                         help='Number of hidden units per layer')
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
-    print("use_cuda={0}".format(use_cuda))
-
-    torch.manual_seed(args.seed)
-    
+    print("use_cuda={0}".format(use_cuda))    
     device = torch.device("cuda" if use_cuda else "cpu")
 
     train_kwargs = {'batch_size': args.batch_size}
@@ -146,11 +136,11 @@ def main():
         train_kwargs.update(cuda_kwargs)
         test_kwargs.update(cuda_kwargs)
     
-    params = {'batch_size': 1, 'shuffle': True, 'num_workers': 6}
+    params = {'batch_size': 4, 'shuffle': True, 'num_workers': 6}
     
-    train_set = GraphDataset('../data/RecoilElectrons.10k.data')
+    train_set = GraphDataset('../data/RecoilElectrons.100k.data')
     train_loader = DataLoader(train_set, **params)
-    test_set = GraphDataset('../data/RecoilElectrons.1k.data')
+    test_set = GraphDataset('../data/RecoilElectrons.10k.data')
     test_loader = DataLoader(test_set, **params)
     val_set = GraphDataset('../data/RecoilElectrons.1k.data')
     val_loader = DataLoader(val_set, **params)
@@ -160,6 +150,7 @@ def main():
     print('total trainable params:', total_trainable_params)
     
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
+    print(optimizer)
     scheduler = StepLR(optimizer, step_size=args.step_size,
                        gamma=args.gamma)
 
@@ -172,24 +163,19 @@ def main():
         print('...optimal threshold', thld)
         test_loss, test_acc = test(model, device, test_loader, thld=thld)
         scheduler.step()
-        
-        if args.save_model:
-            torch.save(model.state_dict(),
-                       "trained_models/train{}_PyG_{}_epoch{}_{}GeV_redo.pt"
-                       .format(args.sample, args.construction, epoch, args.pt))
 
         output['train_loss'].append(train_loss)
         output['test_loss'].append(test_loss)
         output['test_acc'].append(test_acc)
-    
-       
 
+        if args.save_model:
+            torch.save(model.state_dict(),
+                       "trained_models/train{}_PyG_epoch{}_{}GeV.pt"
+                       .format(args.sample, epoch, args.pt))
+            torch.save(output, "trained_models/loss_dict.bin")
 
 if __name__ == '__main__':
     main()
-
-
-
 
 """
 TODO
