@@ -41,7 +41,7 @@ echo "Starting execution..."
 source activate torch_env_2
 pip install --user torch
 pip install --user pyg_lib torch_scatter torch_sparse 
-pip install --user torch-geometric
+pip install --user torch_geometric
 cd interaction_network
 
 python3 train.py
