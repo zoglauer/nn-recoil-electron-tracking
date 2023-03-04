@@ -35,15 +35,15 @@ echo "Loading modules..."
 module purge
 module load ml/torch/torch7 python/3.7 
 
-echo "Starting execution..."
-
 # --> ADAPT THE FILENAME
-source activate torch_env_2
-pip install --user torch
-pip install --user pyg_lib torch_scatter torch_sparse 
-pip install --user torch_geometric
+#source activate torch_env_2
+#pip uninstall --user torch
+#pip uninstall --user pyg_lib torch_scatter torch_sparse 
+#pip uninstall --user torch_geometric
 cd interaction_network
 
+
+echo "Starting execution..."
 python3 train.py
 
 echo "Waiting for all processes to end..."
