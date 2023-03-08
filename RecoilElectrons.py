@@ -53,7 +53,7 @@ YBins = 64
 ZBins = 64
 
 # File names
-FileName = "data/RecoilElectrons.100k.data"
+FileName = "RecoilElectrons.10k.v2.data"
 
 # Depends on GPU memory and layout
 BatchSize = 64
@@ -84,7 +84,7 @@ OutputDirectory = "Results"
 
 
 parser = argparse.ArgumentParser(description='Perform training and/or testing of the event clustering machine learning tools.')
-parser.add_argument('-f', '--filename', default=FileName, help='File name with training/testing data')
+parser.add_argument('-f', '--filename', default='RecoilElectrons.10k.v2.data', help='File name with training/testing data')
 parser.add_argument('-m', '--maxevents', default=MaxEvents, help='Maximum number of events to use')
 parser.add_argument('-s', '--testingtrainingsplit', default=TestingTrainingSplit, help='Testing-training split')
 parser.add_argument('-b', '--batchsize', default=BatchSize, help='Batch size')
@@ -342,16 +342,14 @@ def CheckPerformance():
     #print(Result[e])
     #print(OutputTensor[e])
 
-    for e in range(Batch * BatchSize, (Batch + 1) * BatchSize-1):
-      index = e - Batch * BatchSize
-      
-      Event = TestingDataSets[e]
+    for e in range(0, BatchSize):
+      Event = TestingDataSets[e + Batch*BatchSize]
       
       oPos = np.array([ Event.TrackRealStartX, Event.TrackRealStartY, Event.TrackRealStartZ ])
-      rPos = np.array([ Result[index][0], Result[index][1], Result[index][2] ])
+      rPos = np.array([ Result[e][0], Result[e][1], Result[e][2] ])
       
       oDir = np.array([ Event.TrackRealDirectionX, Event.TrackRealDirectionY, Event.TrackRealDirectionZ ])
-      rDir = np.array([ Result[index][3], Result[index][4], Result[index][5] ])
+      rDir = np.array([ Result[e][3], Result[e][4], Result[e][5] ])
       
       # Distance difference location:
       DistDiff = np.linalg.norm(oPos - rPos)
@@ -432,7 +430,7 @@ while Iteration < MaxIterations:
   print("\n\nStarting iteration {}".format(Iteration))
 
   # Step 1: Loop over all training batches
-  for Batch in range(0, 150):
+  for Batch in range(0, NTrainingBatches):
     print("Batch {} / {}".format(Batch+1, NTrainingBatches))
     
     # Step 1.1: Convert the data set into the input and output tensor
@@ -442,7 +440,7 @@ while Iteration < MaxIterations:
     OutputTensor = np.zeros(shape=(BatchSize, OutputDataSpaceSize))
 
     # Loop over all training data sets and add them to the tensor
-    for g in range(Batch * BatchSize, (Batch + 1) * BatchSize-1):
+    for g in range(0, BatchSize):
       Event = TrainingDataSets[g + Batch*BatchSize]
 
       # Set all the hit locations and energies
@@ -451,16 +449,15 @@ while Iteration < MaxIterations:
         YBin = int( (Event.Y[h] - YMin) / ((YMax - YMin) / YBins) )
         ZBin = int( (Event.Z[h] - ZMin) / ((ZMax - ZMin) / ZBins) )
         if XBin >= 0 and YBin >= 0 and ZBin >= 0 and XBin < XBins and YBin < YBins and ZBin < ZBins:
-
-          InputTensor[g - Batch * BatchSize][XBin][YBin][ZBin][0] = Event.E[h]
+          InputTensor[g][XBin][YBin][ZBin][0] = Event.E[h]
       
-      OutputTensor[g - Batch * BatchSize][0] = Event.TrackRealStartX
-      OutputTensor[g - Batch * BatchSize][1] = Event.TrackRealStartY
-      OutputTensor[g - Batch * BatchSize][2] = Event.TrackRealStartZ
+      OutputTensor[g][0] = Event.TrackRealStartX
+      OutputTensor[g][1] = Event.TrackRealStartY
+      OutputTensor[g][2] = Event.TrackRealStartZ
 
-      OutputTensor[g - Batch * BatchSize][3] = Event.TrackRealDirectionX
-      OutputTensor[g - Batch * BatchSize][4] = Event.TrackRealDirectionY
-      OutputTensor[g - Batch * BatchSize][5] = Event.TrackRealDirectionZ
+      OutputTensor[g][3] = Event.TrackRealDirectionX
+      OutputTensor[g][4] = Event.TrackRealDirectionY
+      OutputTensor[g][5] = Event.TrackRealDirectionZ
 
     TimeConverting += time.time() - TimerConverting
 
@@ -485,7 +482,6 @@ while Iteration < MaxIterations:
     TimesNoImprovement = 0
 
     print("\nFound new best model and performance!")
-    Model.save(f'model{Iteration}.bin')
   else:
     TimesNoImprovement += 1
 
