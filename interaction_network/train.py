@@ -101,8 +101,8 @@ def main():
                         help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',
                         help='input batch size for testing (default: 1000)')
-    parser.add_argument('--epochs', type=int, default=14, metavar='N',
-                        help='number of epochs to train (default: 14)')
+    parser.add_argument('--epochs', type=int, default=100, metavar='N',
+                        help='number of epochs to train (default: 100)')
     parser.add_argument('--lr', type=float, default=0.001, metavar='LR',
                         help='learning rate (default: 1.0)')
     parser.add_argument('--gamma', type=float, default=0.7, metavar='M',
@@ -170,16 +170,8 @@ def main():
 
         if args.save_model:
             torch.save(model.state_dict(),
-                       "trained_models/train{}_PyG_epoch{}_{}GeV.pt"
-                       .format(args.sample, epoch, args.pt))
+                       f"trained_models/model_epoch_{epoch}.pt")
             torch.save(output, "trained_models/loss_dict.bin")
 
 if __name__ == '__main__':
     main()
-
-"""
-TODO
-- figure out why data.edge_attr.size(), output.size() are related
-    - ie why is size (10, 169) rather than just 1
-- try just a simple linear model
-"""

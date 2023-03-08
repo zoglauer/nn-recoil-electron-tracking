@@ -14,7 +14,14 @@ import argparse
 
 MARGIN = .1
 
-def save_pred_projections(data: EventData, pred_vec=[0, 0, 0, 0, 0, 0], save_file=None):
+def save_pred_projections(
+        data: EventData, 
+        pred_vec=[0, 0, 0, 0, 0, 0], 
+        save_file=None,
+        show_vectors=True,
+        show_track=False,
+        pred_edge_list=None
+    ):
     fig, axs = plt.subplots(2, 2, figsize=(8, 8))
 
     x, y, z, dx, dy, dz = pred_vec
@@ -43,50 +50,6 @@ def save_pred_projections(data: EventData, pred_vec=[0, 0, 0, 0, 0, 0], save_fil
     axs[1, 0].set_xlim([min(data.Y) - MARGIN, max(data.Y) + MARGIN])
     axs[1, 0].set_ylim([min(data.Z) - MARGIN, max(data.Z) + MARGIN])
 
-
-    axs[0, 0].quiver(
-        data.TrackRealStartX, 
-        data.TrackRealStartY, 
-        data.TrackRealDirectionX, 
-        data.TrackRealDirectionY,
-        color='red', angles='xy', scale_units='xy', scale=1.)
-    axs[0, 0].quiver(
-        data.TrackMeasuredStartX, 
-        data.TrackMeasuredStartY, 
-        data.TrackMeasuredDirectionX, 
-        data.TrackMeasuredDirectionY,
-        color='blue', angles='xy', scale_units='xy', scale=1.)
-    axs[0, 0].quiver(x,  y,  dx,  dy, color='g', angles='xy', scale_units='xy', scale=1.)
-    axs[0, 0].set(xlabel='x', ylabel='y')
-   
-    axs[0, 1].quiver(data.TrackRealStartX, 
-        data.TrackRealStartZ, 
-        data.TrackRealDirectionX, 
-        data.TrackRealDirectionZ,
-        color='red', angles='xy', scale_units='xy', scale=1.)
-    axs[0, 1].set(xlabel='x', ylabel='z')
-    axs[0, 1].quiver(
-        data.TrackMeasuredStartX, 
-        data.TrackMeasuredStartZ, 
-        data.TrackMeasuredDirectionX, 
-        data.TrackMeasuredDirectionZ,
-        color='blue', angles='xy', scale_units='xy', scale=1.)
-    axs[0, 1].quiver(x,  z,  dx,  dz, color='g', angles='xy', scale_units='xy', scale=1.)
-
-    axs[1, 0].quiver(data.TrackRealStartY, 
-        data.TrackRealStartZ, 
-        data.TrackRealDirectionY, 
-        data.TrackRealDirectionZ,
-        color='red', angles='xy', scale_units='xy', scale=1.)
-    axs[1, 0].set(xlabel='y', ylabel='z')
-    axs[1, 0].quiver(
-        data.TrackMeasuredStartY, 
-        data.TrackMeasuredStartZ, 
-        data.TrackMeasuredDirectionY, 
-        data.TrackMeasuredDirectionZ,
-        color='blue', angles='xy', scale_units='xy', scale=1.)
-    axs[1, 0].quiver(y,  z,  dy,  dz, color='g', angles='xy', scale_units='xy', scale=1.)
-
     axs[1, 1].set_xlabel('x')
     axs[1, 1].set_ylabel('y')
     axs[1, 1].set_zlabel('z')
@@ -95,28 +58,129 @@ def save_pred_projections(data: EventData, pred_vec=[0, 0, 0, 0, 0, 0], save_fil
         axs[1, 1].scatter(data.X[i],data.Y[i],data.Z[i],color='b') 
         axs[1, 1].text(data.X[i],data.Y[i],data.Z[i],  '%d' % data.E[i], size=10, zorder=1, color='k') 
 
-    axs[1, 1].quiver(data.TrackRealStartX, 
-        data.TrackRealStartY, 
-        data.TrackRealStartZ, 
-        data.TrackRealDirectionX, 
-        data.TrackRealDirectionY,
-        data.TrackRealDirectionZ, 
-        color='red',
-        label='Real',
-        arrow_length_ratio=.1)
-
-    axs[1, 1].quiver(data.TrackMeasuredStartX, 
-        data.TrackMeasuredStartY, 
-        data.TrackMeasuredStartZ, 
-        data.TrackMeasuredDirectionX, 
-        data.TrackMeasuredDirectionY,
-        data.TrackMeasuredDirectionZ, 
-        color='b', 
-        label='Measured',
-        arrow_length_ratio=.1)
-
-    axs[1, 1].quiver(pred_vec[0],pred_vec[1],pred_vec[2], pred_vec[3],pred_vec[4],pred_vec[5], color='g', label='Predicted', arrow_length_ratio=.1)
+    if show_vectors:
+        axs[0, 0].quiver(
+            data.TrackRealStartX, 
+            data.TrackRealStartY, 
+            data.TrackRealDirectionX, 
+            data.TrackRealDirectionY,
+            color='red', angles='xy', scale_units='xy', scale=1.)
+        axs[0, 0].quiver(
+            data.TrackMeasuredStartX, 
+            data.TrackMeasuredStartY, 
+            data.TrackMeasuredDirectionX, 
+            data.TrackMeasuredDirectionY,
+            color='blue', angles='xy', scale_units='xy', scale=1.)
+        axs[0, 0].quiver(x,  y,  dx,  dy, color='g', angles='xy', scale_units='xy', scale=1.)
+        axs[0, 0].set(xlabel='x', ylabel='y')
     
+        axs[0, 1].quiver(data.TrackRealStartX, 
+            data.TrackRealStartZ, 
+            data.TrackRealDirectionX, 
+            data.TrackRealDirectionZ,
+            color='red', angles='xy', scale_units='xy', scale=1.)
+        axs[0, 1].set(xlabel='x', ylabel='z')
+        axs[0, 1].quiver(
+            data.TrackMeasuredStartX, 
+            data.TrackMeasuredStartZ, 
+            data.TrackMeasuredDirectionX, 
+            data.TrackMeasuredDirectionZ,
+            color='blue', angles='xy', scale_units='xy', scale=1.)
+        axs[0, 1].quiver(x,  z,  dx,  dz, color='g', angles='xy', scale_units='xy', scale=1.)
+
+        axs[1, 0].quiver(data.TrackRealStartY, 
+            data.TrackRealStartZ, 
+            data.TrackRealDirectionY, 
+            data.TrackRealDirectionZ,
+            color='red', angles='xy', scale_units='xy', scale=1.)
+        axs[1, 0].set(xlabel='y', ylabel='z')
+        axs[1, 0].quiver(
+            data.TrackMeasuredStartY, 
+            data.TrackMeasuredStartZ, 
+            data.TrackMeasuredDirectionY, 
+            data.TrackMeasuredDirectionZ,
+            color='blue', angles='xy', scale_units='xy', scale=1.)
+        axs[1, 0].quiver(y,  z,  dy,  dz, color='g', angles='xy', scale_units='xy', scale=1.)
+
+        axs[1, 1].quiver(data.TrackRealStartX, 
+            data.TrackRealStartY, 
+            data.TrackRealStartZ, 
+            data.TrackRealDirectionX, 
+            data.TrackRealDirectionY,
+            data.TrackRealDirectionZ, 
+            color='red',
+            label='Real',
+            arrow_length_ratio=.1)
+
+        axs[1, 1].quiver(data.TrackMeasuredStartX, 
+            data.TrackMeasuredStartY, 
+            data.TrackMeasuredStartZ, 
+            data.TrackMeasuredDirectionX, 
+            data.TrackMeasuredDirectionY,
+            data.TrackMeasuredDirectionZ, 
+            color='b', 
+            label='Measured',
+            arrow_length_ratio=.1)
+
+        axs[1, 1].quiver(pred_vec[0],pred_vec[1],pred_vec[2], pred_vec[3],pred_vec[4],pred_vec[5], color='g', label='Predicted', arrow_length_ratio=.1)
+        
+    if show_track:
+        for i in range(len(data.E)-1):
+            dx, dy, dz = data.X[i+1] - data.X[i], data.Y[i+1] - data.Y[i], data.Z[i+1] - data.Z[i]
+            axs[0, 0].quiver(
+                data.X[i], data.Y[i],
+                dx, dy,
+                color='purple',
+                angles='xy', scale_units='xy', scale=1.
+            )
+            axs[0, 1].quiver(
+                data.X[i], data.Z[i],
+                dx, dz,
+                color='purple',
+                angles='xy', scale_units='xy', scale=1.
+            )
+            axs[1, 0].quiver(
+                data.Y[i], data.Z[i],
+                dy, dz,
+                color='purple',
+                angles='xy', scale_units='xy', scale=1.
+            )
+            axs[1, 1].quiver(
+                data.X[i], data.Y[i], data.Z[i],
+                dx, dy, dz,
+                color='purple',
+                arrow_length_ratio=.1
+            )
+
+    if pred_edge_list:
+        for i, j in pred_edge_list:
+            color = "green" if i+1 == j else "orange"
+            dx, dy, dz = data.X[j] - data.X[i], data.Y[j] - data.Y[i], data.Z[j] - data.Z[i]
+            axs[0, 0].quiver(
+                data.X[i], data.Y[i],
+                dx, dy,
+                color=color,
+                angles='xy', scale_units='xy', scale=1.
+            )
+            axs[0, 1].quiver(
+                data.X[i], data.Z[i],
+                dx, dz,
+                color=color,
+                angles='xy', scale_units='xy', scale=1.
+            )
+            axs[1, 0].quiver(
+                data.Y[i], data.Z[i],
+                dy, dz,
+                color=color,
+                angles='xy', scale_units='xy', scale=1.
+            )
+            axs[1, 1].quiver(
+                data.X[i], data.Y[i], data.Z[i],
+                dx, dy, dz,
+                color=color,
+                arrow_length_ratio=.1
+            )
+
     plt.legend(loc="upper left")
 
    
@@ -128,7 +192,11 @@ def save_pred_projections(data: EventData, pred_vec=[0, 0, 0, 0, 0, 0], save_fil
     #plt.show()
     plt.close()
 
-def show_pred(data: EventData, pred_vec=[0, 0, 0, 0, 0, 0]):
+def show_pred(data: EventData, 
+              pred_vec=[0, 0, 0, 0, 0, 0], 
+              show_vectors=True, 
+              show_track=True,
+              pred_edge_list=None):
     mpl.rcParams['legend.fontsize'] = 10
 
     fig = plt.figure()
@@ -144,25 +212,47 @@ def show_pred(data: EventData, pred_vec=[0, 0, 0, 0, 0, 0]):
         ax.scatter(data.X[i],data.Y[i],data.Z[i],color='b') 
         ax.text(data.X[i],data.Y[i],data.Z[i],  '%d' % data.E[i], size=10, zorder=1, color='k') 
 
-    ax.quiver(data.TrackRealStartX, 
-        data.TrackRealStartY, 
-        data.TrackRealStartZ, 
-        data.TrackRealDirectionX, 
-        data.TrackRealDirectionY,
-        data.TrackRealDirectionZ, 
-        color='red',
-        arrow_length_ratio=.1)
+    if show_track:
+        for i in range(len(data.E)-1):
+            dx, dy, dz = data.X[i+1] - data.X[i], data.Y[i+1] - data.Y[i], data.Z[i+1] - data.Z[i]
+            ax.quiver(
+                data.X[i], data.Y[i], data.Z[i],
+                dx, dy, dz,
+                color='purple',
+                arrow_length_ratio=.1
+            )
 
-    ax.quiver(data.TrackMeasuredStartX, 
-        data.TrackMeasuredStartY, 
-        data.TrackMeasuredStartZ, 
-        data.TrackMeasuredDirectionX, 
-        data.TrackMeasuredDirectionY,
-        data.TrackMeasuredDirectionZ, 
-        color='b', 
-        arrow_length_ratio=.1)
+    if pred_edge_list:
+        for i, j in pred_edge_list:
+            dx, dy, dz = data.X[j] - data.X[i], data.Y[j] - data.Y[i], data.Z[j] - data.Z[i]
+            color = "green" if i+1 == j else "orange"
+            ax.quiver(
+                data.X[i], data.Y[i], data.Z[i],
+                dx, dy, dz,
+                color='orange',
+                arrow_length_ratio=.1
+            )
+    
+    if show_vectors:
+        ax.quiver(data.TrackRealStartX, 
+            data.TrackRealStartY, 
+            data.TrackRealStartZ, 
+            data.TrackRealDirectionX, 
+            data.TrackRealDirectionY,
+            data.TrackRealDirectionZ, 
+            color='red',
+            arrow_length_ratio=.1)
 
-    ax.quiver(pred_vec[0],pred_vec[1],pred_vec[2], pred_vec[3],pred_vec[4],pred_vec[5], color='g', arrow_length_ratio=.1)
+        ax.quiver(data.TrackMeasuredStartX, 
+            data.TrackMeasuredStartY, 
+            data.TrackMeasuredStartZ, 
+            data.TrackMeasuredDirectionX, 
+            data.TrackMeasuredDirectionY,
+            data.TrackMeasuredDirectionZ, 
+            color='b', 
+            arrow_length_ratio=.1)
+
+        ax.quiver(pred_vec[0],pred_vec[1],pred_vec[2], pred_vec[3],pred_vec[4],pred_vec[5], color='g', arrow_length_ratio=.1)
 
     plt.show()
     #ds_hash = abs(hash(data))
@@ -187,7 +277,7 @@ def view_png_format(args):
     n = args.num_save if args.num_save else len(data)
     n = min(n, len(data))
     for i in range(n):
-        save_pred_projections(data[i], save_file=args.save_file)
+        save_pred_projections(data[i], save_file=args.save_file, show_track=True)
 
 def test():
     f = open('./data/RecoilElectrons.1k.data', mode='rb')

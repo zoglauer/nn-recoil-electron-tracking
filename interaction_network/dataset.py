@@ -16,7 +16,7 @@ import EventData
 MAX_HITPOINTS = 13
 
 def euclidean_dist(event: EventData, i, j):
-    """euclidean dist btwn hitpoint i and j"""
+    """euclidean dist between hitpoint i and j"""
     return math.sqrt((event.X[i] - event.X[j])**2 + (event.Y[i] - event.Y[j])**2 + (event.Z[i] - event.Z[j])**2)
 
 
@@ -78,9 +78,10 @@ class GraphDataset(Dataset):
                     y[c] = 0
                 c += 1
         
-        return Data(x=X, edge_index=edge_index, edge_attr=edge_attr, y=y)
+        return Data(x=X, edge_index=edge_index, edge_attr=edge_attr, y=y, permutation=permutation)
 
-
+    def get_event(self, idx):
+        return self.event_list[idx]
 
 
 if __name__ == '__main__':
