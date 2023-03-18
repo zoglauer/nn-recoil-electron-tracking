@@ -37,6 +37,7 @@ module load ml/torch/torch7 python/3.9
 
 # --> ADAPT THE FILENAME
 #source activate torch_env_2
+conda install mamba -n base -c conda-forge
 mamba install torch_sparse
 #pip uninstall --user torch
 #pip uninstall --user pyg_lib torch_scatter torch_sparse 
