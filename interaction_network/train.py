@@ -3,7 +3,6 @@ import argparse
 from time import time
 import sys
 
-import numpy as np
 import torch
 import torch_geometric
 import torch.nn.functional as F
@@ -34,12 +33,10 @@ def train(args, model, device, train_loader, optimizer, epoch):
                 epoch, batch_idx, len(train_loader.dataset),
                 100. * batch_idx / len(train_loader), loss.item()))
             #print(data.x.size(), data.edge_attr.size(), data.edge_index.size(), output.size())
-            if args.dry_run:
-                break
         losses.append(loss.item())
     print("...epoch time: {0}s".format(time()-epoch_t0))
-    print("...epoch {}: train loss={}".format(epoch, np.mean(losses)))
-    return np.mean(losses)
+    print("...epoch {}: train loss={}".format(epoch, torch.mean(losses)))
+    return torch.mean(losses)
 
 def validate(model, device, val_loader):
     model.eval()
@@ -53,7 +50,7 @@ def validate(model, device, val_loader):
         # define optimal threshold (thld) where TPR = TNR 
         diff, opt_thld, opt_acc = 100, 0, 0
         best_tpr, best_tnr = 0, 0
-        for thld in np.arange(0.001, 0.5, 0.001):
+        for thld in torch.arange(0.001, 0.5, 0.001):
             TP = torch.sum((y==1) & (output>thld)).item()
             TN = torch.sum((y==0) & (output<thld)).item()
             FP = torch.sum((y==0) & (output>thld)).item()
@@ -74,8 +71,8 @@ def validate(model, device, val_loader):
         opt_thlds.append(opt_thld)
         accs.append(opt_acc)
 
-    print("...val accuracy=", np.mean(accs))
-    return np.mean(opt_thlds) 
+    print("...val accuracy=", torch.mean(accs))
+    return torch.mean(opt_thlds) 
 
 def test(model, device, test_loader, thld=0.5):
     model.eval()
@@ -100,8 +97,8 @@ def test(model, device, test_loader, thld=0.5):
             #print(f"acc={TP+TN}/{TP+TN+FP+FN}={acc}")
 
     print('...test loss: {:.4f}\n...test accuracy: {:.4f}'
-          .format(np.mean(losses), np.mean(accs)))
-    return np.mean(losses), np.mean(accs)
+          .format(torch.mean(losses), torch.mean(accs)))
+    return torch.mean(losses), torch.mean(accs)
 
 def main():
     # Training settings
@@ -114,9 +111,9 @@ def main():
                         help='number of epochs to train (default: 100)')
     parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
                         help='learning rate (default: 1.0)')
-    parser.add_argument('--gamma', type=float, default=0.7, metavar='M',
+    parser.add_argument('--gamma', type=float, default=0.95, metavar='M',
                         help='Learning rate step gamma (default: 0.7)')
-    parser.add_argument('--step-size', type=int, default=5,
+    parser.add_argument('--step-size', type=int, default=8,
                         help='Learning rate step size')
     parser.add_argument('--pt', type=str, default='2',
                         help='Cutoff pt value in GeV (default: 2)')
@@ -165,7 +162,7 @@ def main():
     print(optimizer)
     scheduler = StepLR(optimizer, step_size=args.step_size,
                        gamma=args.gamma)
-
+    print(scheduler)
 
     output = {'train_loss': [], 'test_loss': [], 'test_acc': []}
     for epoch in range(1, args.epochs + 1):
