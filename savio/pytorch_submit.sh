@@ -37,7 +37,7 @@ module load ml/torch/torch7 python/3.9 cuda/11.4
 
 # --> ADAPT THE FILENAME
 #source activate torch_env_2
-#pip uninstall --user torch
+pip install --user numpy
 #pip uninstall --user pyg_lib torch_scatter torch_sparse 
 #pip uninstall --user torch_geometric
 cd interaction_network
