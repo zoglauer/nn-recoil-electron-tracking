@@ -33,7 +33,7 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 
 echo "Loading modules..."
 module purge
-module load ml/torch/torch7 python/3.9 cuda/11.4 
+module load pytorch/1.0.0-py36-cuda9.0 python/3.9 cuda/11.4 
 
 # --> ADAPT THE FILENAME
 #source activate torch_env_2
