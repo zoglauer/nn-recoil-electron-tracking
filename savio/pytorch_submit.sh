@@ -35,7 +35,9 @@ echo "Loading modules..."
 module purge
 module load python/3.7 #ml/torch/torch7
 source activate torch_env_3
+echo attempting torch install
 mamba install torch
+echo completed torch install
 
 echo "Starting execution..."
 python3 interaction_network/train.py
