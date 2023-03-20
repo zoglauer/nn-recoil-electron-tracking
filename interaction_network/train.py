@@ -3,7 +3,9 @@ import argparse
 from time import time
 import sys
 
+import numpy as np
 import torch
+print(torch.__version__)
 import torch_geometric
 import torch.nn.functional as F
 from torch import optim
@@ -35,8 +37,8 @@ def train(args, model, device, train_loader, optimizer, epoch):
             #print(data.x.size(), data.edge_attr.size(), data.edge_index.size(), output.size())
         losses.append(loss.item())
     print("...epoch time: {0}s".format(time()-epoch_t0))
-    print("...epoch {}: train loss={}".format(epoch, torch.mean(losses)))
-    return torch.mean(losses)
+    print("...epoch {}: train loss={}".format(epoch, np.mean(losses)))
+    return np.mean(losses)
 
 def validate(model, device, val_loader):
     model.eval()
@@ -50,7 +52,7 @@ def validate(model, device, val_loader):
         # define optimal threshold (thld) where TPR = TNR 
         diff, opt_thld, opt_acc = 100, 0, 0
         best_tpr, best_tnr = 0, 0
-        for thld in torch.arange(0.001, 0.5, 0.001):
+        for thld in np.arange(0.001, 0.5, 0.001):
             TP = torch.sum((y==1) & (output>thld)).item()
             TN = torch.sum((y==0) & (output<thld)).item()
             FP = torch.sum((y==0) & (output>thld)).item()
@@ -71,8 +73,8 @@ def validate(model, device, val_loader):
         opt_thlds.append(opt_thld)
         accs.append(opt_acc)
 
-    print("...val accuracy=", torch.mean(accs))
-    return torch.mean(opt_thlds) 
+    print("...val accuracy=", np.mean(accs))
+    return np.mean(opt_thlds) 
 
 def test(model, device, test_loader, thld=0.5):
     model.eval()
@@ -97,8 +99,8 @@ def test(model, device, test_loader, thld=0.5):
             #print(f"acc={TP+TN}/{TP+TN+FP+FN}={acc}")
 
     print('...test loss: {:.4f}\n...test accuracy: {:.4f}'
-          .format(torch.mean(losses), torch.mean(accs)))
-    return torch.mean(losses), torch.mean(accs)
+          .format(np.mean(losses), np.mean(accs)))
+    return np.mean(losses), np.mean(accs)
 
 def main():
     # Training settings
@@ -111,7 +113,7 @@ def main():
                         help='number of epochs to train (default: 100)')
     parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
                         help='learning rate (default: 1.0)')
-    parser.add_argument('--gamma', type=float, default=0.95, metavar='M',
+    parser.add_argument('--gamma', type=float, default=0.99, metavar='M',
                         help='Learning rate step gamma (default: 0.7)')
     parser.add_argument('--step-size', type=int, default=8,
                         help='Learning rate step size')
@@ -129,7 +131,8 @@ def main():
                         help='Number of hidden units per layer')
     parser.add_argument('--model-iteration', type=str, default=MODEL_ITERATION,
                         help='Name of model iteration')
-
+    parser.add_argument('--resume', action='store_true', default=False,
+                        help='resume from provided save model')
 
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -162,10 +165,21 @@ def main():
     print(optimizer)
     scheduler = StepLR(optimizer, step_size=args.step_size,
                        gamma=args.gamma)
-    print(scheduler)
+    print(f"scheduler ( \n\tgamma: {args.gamma}\n\tstep size: {args.step_size}\n)")
 
     output = {'train_loss': [], 'test_loss': [], 'test_acc': []}
-    for epoch in range(1, args.epochs + 1):
+    start_epoch = 1
+
+    if args.resume:
+        output = torch.load(f"{args.model_iteration}/loss_dict.bin")
+        start_epoch = len(output['train_loss']) + 1
+        print(f"Resuming at epoch {start_epoch}")
+        model_state_dict = torch.load(f"{args.model_iteration}/model_epoch_{start_epoch-1}.pt")
+        model = InteractionNetwork(args.hidden_size)
+        model.load_state_dict(model_state_dict)
+
+
+    for epoch in range(start_epoch, args.epochs + 1):
         print("---- Epoch {} ----".format(epoch))
         train_loss = train(args, model, device, train_loader, optimizer, epoch)
         thld = validate(model, device, val_loader)
