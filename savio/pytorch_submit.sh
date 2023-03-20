@@ -36,8 +36,7 @@ module purge
 module load python/3.7 #ml/torch/torch7
 source activate torch_env_3
 echo attempting torch install
-conda config --append channels conda-forge
-conda install pytorch 
+conda install torch-sparse
 echo completed torch install
 
 echo "Starting execution..."
