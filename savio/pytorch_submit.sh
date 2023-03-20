@@ -32,10 +32,11 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 
 echo "Loading modules..."
+conda remove -n torch_env_2 --all
 module purge
 module load python/3.7 #ml/torch/torch7
-conda create -c conda-forge --name torch_env_2 python=3.9
-source activate torch_env_2
+conda create -c conda-forge --name torch_env python=3.9
+#source activate torch_env_2
 conda install -c conda-forge mamba
 mamba install torch
 
