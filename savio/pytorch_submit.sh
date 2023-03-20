@@ -33,7 +33,7 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 
 echo "Loading modules..."
 module purge
-module activate python/3.10 ml/torch/torch7
+module activate python/3.10
 source activate torch_env_2
 conda install torch
 
