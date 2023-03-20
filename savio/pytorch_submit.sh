@@ -33,18 +33,11 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 
 echo "Loading modules..."
 module purge
-module load ml/torch/torch7 python/3.7 cuda/11.4 
-
-# --> ADAPT THE FILENAME
-#source activate torch_env_2
-#pip install --user numpy
-#pip uninstall --user pyg_lib torch_scatter torch_sparse 
-#pip uninstall --user torch_geometric
-cd interaction_network
+source activate torch_env_2
 
 
 echo "Starting execution..."
-python3 train.py
+python3 interaction_network/train.py
 
-echo "Waiting for all processes to end..."
+echo "Batch Completed"
 wait
