@@ -38,6 +38,7 @@ module load ml/torch/torch7 python/3.7
 echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
+module load python
 conda list
 
 echo "Waiting for all processes to end..."
