@@ -35,6 +35,7 @@ echo "Loading modules..."
 module purge
 module load python/3.7 #ml/torch/torch7
 source activate torch_env_3
+conda install pickle
 echo completed torch install
 
 echo "Starting execution..."
