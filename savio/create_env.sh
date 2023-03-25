@@ -34,14 +34,13 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 echo "Loading modules..."
 module purge
 module load python/3.7 #ml/torch/torch7
-source activate torch_env_3
-echo completed torch install
+conda create -c conda-forge --name torch_env_3 python=3.9
+#source activate torch_env_3
+conda install -c conda-forge mamba
+mamba install torch
 
 echo "Starting execution..."
-cd torch_basic_network
-model_iter=modelv1
-mkdir $model_iter
-python3 train.py --lr .0001 --batch-size 4 --epochs 100 --model-iteration $model_iter >> $model_iter.txt
+python3 interaction_network/train.py
 
 echo "Batch Completed"
 wait
