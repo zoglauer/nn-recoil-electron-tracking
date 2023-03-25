@@ -6,6 +6,7 @@ import pickle
 import sys
 
 sys.path.append("/Users/rohan/cosi/nn-recoil-electron-tracking")
+sys.path.append("/global/home/users/rbohra/RecoilElectronTracking")
 from EventData import EventData
 
 MAX_N = 15

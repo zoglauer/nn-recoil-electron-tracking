@@ -10,9 +10,9 @@ from torch import optim
 from torch.optim.lr_scheduler import StepLR
 from torch.utils.data import Dataset, DataLoader
 
-sys.path.append("/Users/rohan/cosi/nn-recoil-electron-tracking/interaction_network/")
+sys.path.append("/global/home/users/rbohra/RecoilElectronTracking/interaction_network/")
 from simple_dataset import SimpleDataset
-sys.path.append("/Users/rohan/cosi/nn-recoil-electron-tracking")
+sys.path.append("/global/home/users/rbohra/RecoilElectronTracking")
 
 from simple_model import SimpleModel
 
