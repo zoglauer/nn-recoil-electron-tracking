@@ -23,6 +23,27 @@ class RelationalModel(nn.Module):
     def forward(self, m):
         return self.layers(m)
 
+class RelationalModel2(nn.Module):
+    def __init__(self, input_size, output_size, hidden_size):
+        super(RelationalModel2, self).__init__()
+
+        self.layers = nn.Sequential(
+            nn.Linear(input_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, output_size),
+        )
+
+    def forward(self, m):
+        return self.layers(m)
+
 class ObjectModel(nn.Module):
     def __init__(self, input_size, output_size, hidden_size):
         super(ObjectModel, self).__init__()
@@ -38,15 +59,43 @@ class ObjectModel(nn.Module):
     def forward(self, C):
         return self.layers(C)
 
+class ObjectModel2(nn.Module):
+    def __init__(self, input_size, output_size, hidden_size):
+        super(ObjectModel2, self).__init__()
+
+        self.layers = nn.Sequential(
+            nn.Linear(input_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, hidden_size),
+            nn.ReLU(),
+            nn.Linear(hidden_size, output_size),
+        )
+
+    def forward(self, C):
+        return self.layers(C)
+
+
 class InteractionNetwork(MessagePassing):
-    def __init__(self, hidden_size):
+    def __init__(self, hidden_size, double_depth=True):
         super(InteractionNetwork, self).__init__(aggr='add', 
                                                  flow='source_to_target')
-        # x, y, z, e, x, y, z, e, delta pos
-        self.R1 = RelationalModel(10, 4, hidden_size)
+        # x, y, z, e, x, y, z, e, d_pos, de, dx, dy, dz = 13
+        self.R1 = RelationalModel(13, 4, hidden_size)
         self.O = ObjectModel(8, 3, hidden_size)
         self.R2 = RelationalModel(10, 1, hidden_size)
         self.E: Tensor = Tensor()
+
+        if double_depth:
+            self.R1 = RelationalModel2(13, 4, hidden_size)
+            self.O = ObjectModel2(8, 3, hidden_size)
+            self.R2 = RelationalModel2(10, 1, hidden_size)
+            self.E: Tensor = Tensor()
 
     def forward(self, x: Tensor, edge_index: Tensor, edge_attr: Tensor) -> Tensor:
         # propagate_type: (x: Tensor, edge_attr: Tensor)

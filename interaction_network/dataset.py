@@ -4,7 +4,6 @@ import numpy as np
 from torch_geometric.data import Data, Dataset
 from torch_geometric.utils import to_undirected
 from torch_geometric.transforms import ToUndirected
-
 import pickle
 import random
 import sys
@@ -13,7 +12,6 @@ sys.path.append("/home/rohan/nn-recoil-electron-tracking/")
 
 sys.path.append("/Users/rohan/cosi/nn-recoil-electron-tracking")
 import EventData
-import Visualizer
 
 def euclidean_dist(event: EventData, i, j):
     """euclidean dist between hitpoint i and j"""
@@ -78,10 +76,7 @@ class GraphDataset(Dataset):
         
         return Data(x=X, edge_index=edge_index, edge_attr=edge_attr, y=y, permutation=permutation, eventdata=event)
 
-    def get(self, idx):
-        if not self.directed:
-            return self.get_undirected(idx)
-        
+    def get_original(self, idx, num_node_features=4, num_edge_features=5):
         event = self.event_list[idx]
         N = len(event.E)
         E = N*(N-1)
@@ -92,17 +87,7 @@ class GraphDataset(Dataset):
         X = torch.zeros((N, 4))
         y = torch.zeros((E, 1))
         edge_index = torch.zeros((2, E), dtype=torch.int64)
-        edge_attr = torch.zeros((E, 2)) # just use euclidean dist, energy diff for now
-
-        c = 0
-        for i in range(N):
-            for j in range(N):
-                if i != j:
-                    edge_index[0][c] = i
-                    edge_index[1][c] = j
-                    edge_attr[c][0] = euclidean_dist(event, permutation[i], permutation[j])
-                    edge_attr[c][1] = event.E[permutation[i]]-event.E[permutation[j]]
-                    c += 1
+        edge_attr = torch.zeros((E, 5)) # just use euclidean dist, energy diff for now, maybe add dx, dy, dz?
 
         c = 0
         for i in range(N):
@@ -119,27 +104,95 @@ class GraphDataset(Dataset):
                 else:
                     y[c] = 0
                 c += 1
+
+        for i in range(num_node_features):
+            mean, std = torch.mean(X[:, i]), torch.std(X[:, i])
+            X[:, i] = (X[:, i]-mean)/std
         
+        X = torch.nan_to_num(X)
+        c = 0
+        for i in range(N):
+            for j in range(N):
+                if i != j:
+                    edge_index[0][c] = i
+                    edge_index[1][c] = j
+                    edge_attr[c][0] = euclidean_dist(event, permutation[i], permutation[j])
+                    edge_attr[c][1] = event.E[permutation[i]]-event.E[permutation[j]]
+                    edge_attr[c][2] = event.X[permutation[i]]-event.X[permutation[j]]
+                    edge_attr[c][3] = event.Y[permutation[i]]-event.Y[permutation[j]]
+                    edge_attr[c][4] = event.Z[permutation[i]]-event.Z[permutation[j]]
+                    c += 1
+
+        for i in range(num_edge_features):
+            mean, std = torch.mean(edge_attr[:, i]), torch.std(edge_attr[:, i])
+            edge_attr[:, i] = (edge_attr[:, i]-mean)/std
+        edge_attr = torch.nan_to_num(edge_attr)
+
         return Data(x=X, edge_index=edge_index, edge_attr=edge_attr, y=y, permutation=permutation, eventdata=event)
 
+    def get_unpermuted(self, idx, num_node_features, num_edge_features):
+        event = self.event_list[idx]
+        N = len(event.E)
+        E = N*(N-1)
+
+        X = torch.zeros((N, 4))
+        y = torch.zeros((E, 1))
+        edge_index = torch.zeros((2, E), dtype=torch.int64)
+        edge_attr = torch.zeros((E, 5)) # just use euclidean dist, energy diff for now, maybe add dx, dy, dz?
+
+        c = 0
+        for i in range(N):
+            X[i][0] = event.X[i]
+            X[i][1] = event.Y[i]
+            X[i][2] = event.Z[i]
+            X[i][3] = event.E[i]
+
+            for j in range(N):
+                if i == j:
+                    continue
+                if j == i + 1:
+                    y[c] = 1
+                else:
+                    y[c] = 0
+                c += 1
+
+        for i in range(num_node_features):
+            mean, std = torch.mean(X[:, i]), torch.std(X[:, i])
+            X[:, i] = (X[:, i]-mean)/std
+        
+        X = torch.nan_to_num(X)
+        c = 0
+        for i in range(N):
+            for j in range(N):
+                if i != j:
+                    edge_index[0][c] = i
+                    edge_index[1][c] = j
+                    edge_attr[c][0] = euclidean_dist(event, i, j)
+                    edge_attr[c][1] = event.E[i]-event.E[j]
+                    edge_attr[c][2] = event.X[i]-event.X[j]
+                    edge_attr[c][3] = event.Y[i]-event.Y[j]
+                    edge_attr[c][4] = event.Z[i]-event.Z[j]
+                    c += 1
+
+        for i in range(num_edge_features):
+            mean, std = torch.mean(edge_attr[:, i]), torch.std(edge_attr[:, i])
+            edge_attr[:, i] = (edge_attr[:, i]-mean)/std
+        edge_attr = torch.nan_to_num(edge_attr)
+
+        return Data(x=X, edge_index=edge_index, edge_attr=edge_attr, y=y, eventdata=event)
+
+    def get(self, idx, num_node_features=4, num_edge_features=5):
+        if not self.directed:
+            return self.get_undirected(idx)
+        return self.get_unpermuted(idx, num_node_features=4, num_edge_features=5)
+             
     def get_event(self, idx):
         return self.event_list[idx]
 
 if __name__ == '__main__':
     n = 10
-    ds = GraphDataset('../data/RecoilElectrons.10k.data', directed=False)
+    ds = GraphDataset('../data/RecoilElectrons.10k.data', directed=True)
     a = [random.randint(0, len(ds)) for i in range(n)]
     for i in a:
         data = ds.get(i)
-        for i in range(data.edge_index.size()[0]):
-            for j in range(data.edge_index.size()[1]):
-                print(data.edge_index[i][j])
-                print(data.permutation[int(data.edge_index[i][j].item())])
-                data.edge_index[i][j] = data.permutation[int(data.edge_index[i][j].item())]
-        print(">>>>")
-        print(data.edge_index)
-        print(len(ds.get_event(i).E))
-        print(data.permutation)
-        print(data.y.squeeze())
-        print("<<<<")
-        Visualizer.save_pred_projections(ds.get_event(i), geometric_data=data, show_track=True, show_vectors=False)
+        

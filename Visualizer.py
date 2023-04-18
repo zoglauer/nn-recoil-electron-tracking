@@ -18,11 +18,40 @@ def save_pred_projections(
         data: EventData, 
         pred_vec=[0, 0, 0, 0, 0, 0], 
         save_file=None,
-        show_vectors=True,
+        show_vectors=False,
         show_track=False,
-        pred_edge_list=None
+        pred_edge_list=None,
+        geometric_data=None,
+        directed=True
     ):
     fig, axs = plt.subplots(2, 2, figsize=(8, 8))
+
+    def add_quiver(i, j, color="purple"):
+        dx, dy, dz = data.X[j] - data.X[i], data.Y[j] - data.Y[i], data.Z[j] - data.Z[i]
+        axs[0, 0].quiver(
+            data.X[i], data.Y[i],
+            dx, dy,
+            color=color,
+            angles='xy', scale_units='xy', scale=1.
+        )
+        axs[0, 1].quiver(
+            data.X[i], data.Z[i],
+            dx, dz,
+            color=color,
+            angles='xy', scale_units='xy', scale=1.
+        )
+        axs[1, 0].quiver(
+            data.Y[i], data.Z[i],
+            dy, dz,
+            color=color,
+            angles='xy', scale_units='xy', scale=1.
+        )
+        axs[1, 1].quiver(
+            data.X[i], data.Y[i], data.Z[i],
+            dx, dy, dz,
+            color=color,
+            arrow_length_ratio=.1
+        )
 
     x, y, z, dx, dy, dz = pred_vec
 
@@ -125,65 +154,23 @@ def save_pred_projections(
         axs[1, 1].quiver(pred_vec[0],pred_vec[1],pred_vec[2], pred_vec[3],pred_vec[4],pred_vec[5], color='g', label='Predicted', arrow_length_ratio=.1)
         
     if show_track:
-        for i in range(len(data.E)-1):
-            dx, dy, dz = data.X[i+1] - data.X[i], data.Y[i+1] - data.Y[i], data.Z[i+1] - data.Z[i]
-            axs[0, 0].quiver(
-                data.X[i], data.Y[i],
-                dx, dy,
-                color='purple',
-                angles='xy', scale_units='xy', scale=1.
-            )
-            axs[0, 1].quiver(
-                data.X[i], data.Z[i],
-                dx, dz,
-                color='purple',
-                angles='xy', scale_units='xy', scale=1.
-            )
-            axs[1, 0].quiver(
-                data.Y[i], data.Z[i],
-                dy, dz,
-                color='purple',
-                angles='xy', scale_units='xy', scale=1.
-            )
-            axs[1, 1].quiver(
-                data.X[i], data.Y[i], data.Z[i],
-                dx, dy, dz,
-                color='purple',
-                arrow_length_ratio=.1
-            )
+        if geometric_data is not None:
+            for i, j, y in zip(geometric_data.edge_index[0], geometric_data.edge_index[1], geometric_data.y):
+                if y > .99:
+                    add_quiver(j, i, color="purple")
+        else:
+            for i in range(len(data.E)-1):
+                add_quiver(i+1, i, color="purple")
 
     if pred_edge_list:
         for i, j in pred_edge_list:
             color = "green" if i+1 == j else "orange"
-            dx, dy, dz = data.X[j] - data.X[i], data.Y[j] - data.Y[i], data.Z[j] - data.Z[i]
-            axs[0, 0].quiver(
-                data.X[i], data.Y[i],
-                dx, dy,
-                color=color,
-                angles='xy', scale_units='xy', scale=1.
-            )
-            axs[0, 1].quiver(
-                data.X[i], data.Z[i],
-                dx, dz,
-                color=color,
-                angles='xy', scale_units='xy', scale=1.
-            )
-            axs[1, 0].quiver(
-                data.Y[i], data.Z[i],
-                dy, dz,
-                color=color,
-                angles='xy', scale_units='xy', scale=1.
-            )
-            axs[1, 1].quiver(
-                data.X[i], data.Y[i], data.Z[i],
-                dx, dy, dz,
-                color=color,
-                arrow_length_ratio=.1
-            )
+            if not directed:
+                color = "green" if -1 < i-j < 1 else "orange"
+            add_quiver(j, i, color=color)
 
     plt.legend(loc="upper left")
 
-   
     ds_hash = abs(hash(data))
     if not save_file:
         save_file = "pictures"

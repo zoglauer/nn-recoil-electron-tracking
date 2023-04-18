@@ -5,7 +5,6 @@ import sys
 
 import numpy as np
 import torch
-print(torch.__version__)
 import torch_geometric
 import torch.nn.functional as F
 from torch import optim
@@ -113,7 +112,7 @@ def main():
                         help='number of epochs to train (default: 100)')
     parser.add_argument('--lr', type=float, default=0.01, metavar='LR',
                         help='learning rate (default: 1.0)')
-    parser.add_argument('--gamma', type=float, default=0.99, metavar='M',
+    parser.add_argument('--gamma', type=float, default=0.8, metavar='M',
                         help='Learning rate step gamma (default: 0.7)')
     parser.add_argument('--step-size', type=int, default=8,
                         help='Learning rate step size')
@@ -133,9 +132,11 @@ def main():
                         help='Name of model iteration')
     parser.add_argument('--resume', action='store_true', default=False,
                         help='resume from provided save model')
-
+    parser.add_argument('--double-depth', action='store_true', default=False,
+                        help='double depth model')
     args = parser.parse_args()
     use_cuda = not args.no_cuda and torch.cuda.is_available()
+    print(f"torch v{torch.__version__}")
     print("use_cuda={0}".format(use_cuda))    
     device = torch.device("cuda" if use_cuda else "cpu")
 
@@ -157,7 +158,7 @@ def main():
     val_set = GraphDataset('../data/RecoilElectrons.1k.data', directed=True)
     val_loader = DataLoader(val_set, **params)
     
-    model = InteractionNetwork(args.hidden_size).to(device)
+    model = InteractionNetwork(args.hidden_size, double_depth=args.double_depth).to(device)
     total_trainable_params = sum(p.numel() for p in model.parameters())
     print('total trainable params:', total_trainable_params)
     
@@ -166,7 +167,7 @@ def main():
     scheduler = StepLR(optimizer, step_size=args.step_size,
                        gamma=args.gamma)
     print(f"scheduler ( \n\tgamma: {args.gamma}\n\tstep size: {args.step_size}\n)")
-
+    print(f"Double Depth: {args.double_depth}")
     output = {'train_loss': [], 'test_loss': [], 'test_acc': []}
     start_epoch = 1
 
