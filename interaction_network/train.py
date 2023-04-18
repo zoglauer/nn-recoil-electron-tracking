@@ -15,7 +15,7 @@ from torch.optim.lr_scheduler import StepLR
 from interaction_network import InteractionNetwork
 from dataset import GraphDataset
 sys.path.append("/Users/rohan/cosi/nn-recoil-electron-tracking")
-
+sys.path.append("/home/rohan/nn-recoil-electron-tracking/")
 MODEL_ITERATION = 'modelv6_directed_batchsize16_hidden60'
 
 def train(args, model, device, train_loader, optimizer, epoch):
