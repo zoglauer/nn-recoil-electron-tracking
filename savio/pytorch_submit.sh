@@ -35,12 +35,8 @@ echo "Loading modules..."
 module purge
 module load python/3.7 #ml/torch/torch7
 source activate torch_env_3
-echo attempting torch install
-conda install pytorch-sparse -c pyg
-echo completed torch install
+conda remove --name torch_env_3 --all
 
-echo "Starting execution..."
-python3 interaction_network/train.py
 
 echo "Batch Completed"
 wait
