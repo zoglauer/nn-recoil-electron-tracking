@@ -1,0 +1,5 @@
+BootStrap: docker
+From: pytorch/pytorch:latest
+
+%post    
+    pip install pytorch-sparse
