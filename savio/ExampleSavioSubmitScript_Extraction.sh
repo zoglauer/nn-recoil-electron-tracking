@@ -32,7 +32,7 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 echo "Starting execution..."
 
 # --> ADAPT THE FILENAME
-python3 -u /global/scratch/users/zoglauer/MachineLearning/recoilelectrons/EventExtractor.py -m 100000 -f RecoilElectrons.p1.sim.gz
+python3 -u EventExtractor.py -m 100000 -f new_data.data
 
 echo "Waiting for all processes to end..."
 wait
