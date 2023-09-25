@@ -35,7 +35,7 @@ echo "Loading modules..."
 module purge
 module load python/3.7 #ml/torch/torch7
 conda deactivate
-conda remove --name torch_env_3 --all
+conda remove --name torch_env_2 --all
 
 
 echo "Batch Completed"
