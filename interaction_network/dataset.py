@@ -9,7 +9,7 @@ import random
 import sys
 import math
 sys.path.append("/home/rohan/nn-recoil-electron-tracking/")
-
+sys.path.append("/global/home/users/rbohra/RecoilElectronTracking")
 sys.path.append("/Users/rohan/cosi/nn-recoil-electron-tracking")
 import EventData
 
