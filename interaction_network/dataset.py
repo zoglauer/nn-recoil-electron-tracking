@@ -25,7 +25,7 @@ class GraphDataset(Dataset):
         self.directed = directed
 
         self.event_list = []
-        with gzip(filename, "rb") as file_handle:
+        with gzip.open(filename, "rb") as file_handle:
             self.event_list = pickle.load(file_handle)   
         
     @property
