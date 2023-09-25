@@ -2,4 +2,5 @@ BootStrap: docker
 From: pytorch/pytorch:latest
 
 %post    
-    pip install pytorch-sparse
+    pip install torch_geometric
+    pip install pytorch_sparse
