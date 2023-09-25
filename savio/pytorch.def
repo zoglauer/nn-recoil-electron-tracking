@@ -3,4 +3,3 @@ From: pytorch/pytorch:latest
 
 %post    
     pip install torch_geometric
-    pip install pytorch_sparse
