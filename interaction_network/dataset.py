@@ -5,7 +5,6 @@ from torch_geometric.data import Data, Dataset
 from torch_geometric.utils import to_undirected
 from torch_geometric.transforms import ToUndirected
 import pickle
-import gzip
 import random
 import sys
 import math
@@ -25,7 +24,7 @@ class GraphDataset(Dataset):
         self.directed = directed
 
         self.event_list = []
-        with gzip.open(filename, "rb") as file_handle:
+        with open(filename, "rb") as file_handle:
             self.event_list = pickle.load(file_handle)   
         
     @property
