@@ -33,10 +33,9 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 #================================================================================
 
 apptainer run container.sif
-pip3 install --user torch
-pip3 install --user torch_geometric
-pip3 install --user numpy
-pip3 install --user torch-sparse==0.6.12 -f https://pytorch-geometric.com/whl/torch-1.10.0+cu113.html
+
+pip install --user -r Requirements.txt
+
 python3 interaction_network/train.py
 
 #================================================================================
