@@ -33,9 +33,11 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 #================================================================================
 
 apptainer run container.sif
+export $PYTHON_PATH=$PYTHON_PATH
 echo $pwd
 echo $ls
-pip3 install --local numpy
+pip3 install --user torch_geometric
+pip3 install --user numpy
 python3 interaction_network/train.py
 
 #================================================================================
