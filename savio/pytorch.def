@@ -1,5 +1,10 @@
 BootStrap: docker
 From: pytorch/pytorch:latest
 
+%files
+    ./data:./nn-recoil-electron-tracking/data
 %post    
     pip install torch_geometric
+    git clone https://github.com/zoglauer/nn-recoil-electron-tracking.git
+    python3 nn-recoil-electron-tracking/interaction_network/train.py
+
