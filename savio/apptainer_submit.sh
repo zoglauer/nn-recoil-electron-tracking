@@ -33,7 +33,7 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 #================================================================================
 
 apptainer run container.sif
-
+nvcc --version
 pip install --user -r Requirements.txt
 
 python3 interaction_network/train.py
