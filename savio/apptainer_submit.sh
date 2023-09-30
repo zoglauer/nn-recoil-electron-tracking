@@ -33,7 +33,7 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 #================================================================================
 
 apptainer run container.sif
-python3 interaction_network/test.py
+python3 test.py
 
 #================================================================================
 echo "Batch Completed"
