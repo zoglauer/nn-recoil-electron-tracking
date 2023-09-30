@@ -33,6 +33,8 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 #================================================================================
 
 apptainer run container.sif
+echo $pwd
+echo $ls
 python3 test.py
 
 #================================================================================
