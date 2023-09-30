@@ -32,6 +32,7 @@ export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK
 echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 #================================================================================
 
+apptainer run container.sif
 python3 interaction_network/test.py
 
 #================================================================================
