@@ -36,6 +36,7 @@ apptainer run container.sif
 pip3 install --user torch
 pip3 install --user torch_geometric
 pip3 install --user numpy
+pip3 install --user torch_sparse
 python3 interaction_network/train.py
 
 #================================================================================
