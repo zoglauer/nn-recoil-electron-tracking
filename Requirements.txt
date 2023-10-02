@@ -9,4 +9,4 @@ sklearn
 scipy
 matplotlib
 numpy
-torch=1.9
+torch==1.9
