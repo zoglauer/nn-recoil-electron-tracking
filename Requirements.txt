@@ -4,9 +4,9 @@
 # torch -- installed via setup.sh
 # rootpy -- installed via setup.sh
 
-pyyaml
-sklearn
-scipy
 matplotlib
 numpy
-torch==1.9
+torch==1.12.1
+torch-geometric==2.2.0
+torch-scatter==2.1.0
+torch-sparse==0.6.16
