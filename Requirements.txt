@@ -8,6 +8,5 @@ pyyaml
 sklearn
 scipy
 matplotlib
-jupyterlab
-networkx
-
+numpy
+torch=1.9
