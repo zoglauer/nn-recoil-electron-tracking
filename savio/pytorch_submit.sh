@@ -38,5 +38,8 @@ conda deactivate
 conda install --revision 0
 
 
+nvidia-smi
+
+
 echo "Batch Completed"
 wait
