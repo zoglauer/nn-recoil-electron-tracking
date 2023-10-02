@@ -4,5 +4,4 @@
 # torch -- installed via setup.sh
 # rootpy -- installed via setup.sh
 
-matplotlib
 numpy
