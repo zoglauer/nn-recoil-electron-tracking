@@ -7,8 +7,7 @@ From: pytorch/pytorch:latest
     export TMPDIR='/var/tmp'
     pip3 install torch
     pip3 install torch_geometric
-    pip3 install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric 
+    pip3 install torch-scatter torch-sparse torch-cluster torch-spline-conv  
     pip3 install -r Requirements.txt
-    python3 interaction_network/train.py
 
 
