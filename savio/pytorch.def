@@ -7,4 +7,8 @@ From: pytorch/pytorch:latest
 %post    
     pip install torch_geometric
     git clone https://github.com/zoglauer/nn-recoil-electron-tracking.git
+    pip3 install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
+    pip3 install --user -r Requirements.txt
+    python3 interaction_network/train.py
+
 
