@@ -1,8 +1,5 @@
 BootStrap: docker
 From: pytorch/pytorch:latest
-
-Mounts:
-  - /src:/global/home/users/rbohra/RecoilElectronTracking
 %post    
     python3 -m venv myenv
     source myenv/bin/activate
