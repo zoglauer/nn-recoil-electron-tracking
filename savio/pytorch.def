@@ -1,7 +1,12 @@
 BootStrap: docker
 From: pytorch/pytorch:latest
 
+Mounts:
+  - /src:/global/home/users/rbohra/RecoilElectronTracking
 %post    
+    python3 -m venv myenv
+    source myenv/bin/activate
+
     pip install torch_geometric
     git clone https://github.com/zoglauer/nn-recoil-electron-tracking.git
     pip3 install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
