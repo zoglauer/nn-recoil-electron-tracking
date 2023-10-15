@@ -5,7 +5,8 @@ From: pytorch/pytorch:latest
     python3 -m venv myenv
     . myenv/bin/activate
 
-    pip install torch_geometric
+    pip3 install torch
+    pip3 install torch_geometric
     pip3 install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
     pip3 install --user -r Requirements.txt
     python3 interaction_network/train.py
