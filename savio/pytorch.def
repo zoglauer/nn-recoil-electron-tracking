@@ -2,7 +2,7 @@ BootStrap: docker
 From: pytorch/pytorch:latest
 %post    
     python3 -m venv myenv
-    source myenv/bin/activate
+    . myenv/bin/activate
 
     pip install torch_geometric
     git clone https://github.com/zoglauer/nn-recoil-electron-tracking.git
