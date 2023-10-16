@@ -1,13 +1,16 @@
 BootStrap: docker
-From: pytorch/pytorch:latest
+From: ubuntu/ubuntu:latest
 %post    
-    apt-get update && apt-get install -y python3-venv
+    apt-get update 
+    apt-get install -y python3
+    apt-get install -y python3-pip
+
+    apt-get install -y python3-venv
     python3 -m venv myenv
     . myenv/bin/activate
     export TMPDIR='/var/tmp'
     pip3 install torch
     pip3 install torch_geometric
     pip3 install torch-scatter torch-sparse torch-cluster torch-spline-conv  
-    pip3 install -r Requirements.txt
 
 
