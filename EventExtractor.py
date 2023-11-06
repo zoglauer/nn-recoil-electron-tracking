@@ -266,13 +266,11 @@ if Geometry.ScanSetupFile(M.MString(GeometryName)) == True:
   print("Geometry " + GeometryName + " loaded!")
 else:
   print("Unable to load geometry " + GeometryName + " - Aborting!")
-  quit()
 
 
 Reader = M.MFileEventsSim(Geometry)
 if Reader.Open(M.MString(FileName)) == False:
   print("Unable to open file " + FileName + ". Aborting!")
-  quit()
 
 print("\n\nStarted reading data sets")
 NumberOfEvents = 0
