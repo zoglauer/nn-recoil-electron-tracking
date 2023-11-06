@@ -92,9 +92,9 @@ def main():
     parser = argparse.ArgumentParser(description='PyG Interaction Network Implementation')
     parser.add_argument('--log-interval', type=int, default=10000, metavar='N',
                         help='how many batches to wait before logging inference status')
-    parser.add_argument('--hidden-size', type=int, default=40,
+    parser.add_argument('--hidden-size', type=int, default=60,
                         help='Number of hidden units per layer')
-    parser.add_argument('--model-save', type=str, default='./modelv22_directed_batchsize32/model_epoch_21.pt',
+    parser.add_argument('--model-save', type=str, default='/Users/rohan/cosi/nn-recoil-electron-tracking/interaction_network/model_iters/modelv22_directed_lr001_batchsize4_hidden60/model_epoch_21.pt',
                         help='model save')
     parser.add_argument('--verbose', action='store_true', default=False,
                         help='quickly check a single pass')
@@ -114,33 +114,43 @@ def main():
 
     correct_paths = 0
     avg_path_accuracy = 0
-
+    correct_paths_by_n = [0 for _ in range(30)]
+    total_paths_by_n = [0 for _ in range(30)]
     for i in range(len(test_set)):
         data = test_set[i]
         y_hat = get_inference(model, data).squeeze().detach()
         data.y = data.y.squeeze().detach()
         num_nodes = data.x.size()[0]
+        total_paths_by_n[num_nodes] += 1
         num_edges = num_nodes*(num_nodes-1)
         pred_path = greedy_path(y_hat, num_nodes-1)
-        """print(pred_path)
+        print(pred_path)
         print(data.y)
-        print(">>>>")"""
+        print(">>>>")
         path_accuracy = torch.dot(data.y, pred_path) / (num_nodes-1)
 
         avg_path_accuracy += path_accuracy
         if path_accuracy >= 0.99: # floating pt issues
             correct_paths += 1
+            correct_paths_by_n[num_nodes] += 1
         else:
+            unpermuted_pred_path = None
             unpermuted_pred_path = reverse_permutation(pred_path, data.edge_index, data.permutation)
             save_pred_projections(test_set.get_event(i), 
-                                save_file='modelv22_pictures',
+                                save_file='modelv22_pictures_2',
                                 show_vectors=False,
                                 show_track=True,
                                 pred_edge_list=unpermuted_pred_path)
-        
     print(f"Final Results:")
     print(f"proportion correctly predicted: {correct_paths / num_samples}")
     print(f"average dot product: {avg_path_accuracy / num_samples}")
+
+    temp = 0
+    for c, t in zip(correct_paths_by_n, total_paths_by_n):
+        if t == 0:
+            t = 1
+        print(f"{temp}: {c/t}; total: {t}")
+        temp += 1
     """
     batchsize 1 lr .001:
     Final Results:

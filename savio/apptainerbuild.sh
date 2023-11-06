@@ -3,7 +3,7 @@
 # Remember:
 # Submit via: sbatch ...
 
-#SBATCH -J Sim
+#SBATCH -J Python
 
 #SBATCH --account=fc_cosi
 #SBATCH --partition=savio3_htc

@@ -184,7 +184,7 @@ class GraphDataset(Dataset):
     def get(self, idx, num_node_features=4, num_edge_features=5):
         if not self.directed:
             return self.get_undirected(idx)
-        return self.get_unpermuted(idx, num_node_features=4, num_edge_features=5)
+        return self.get_original(idx, num_node_features=4, num_edge_features=5)
              
     def get_event(self, idx):
         return self.event_list[idx]

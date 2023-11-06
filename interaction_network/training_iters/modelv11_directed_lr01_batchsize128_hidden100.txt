@@ -1,0 +1,714 @@
+use_cuda=False
+total trainable params: 34208
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    eps: 1e-08
+    foreach: None
+    lr: 0.01
+    maximize: False
+    weight_decay: 0
+)
+<torch.optim.lr_scheduler.StepLR object at 0x7f9d80bc2940>
+---- Epoch 1 ----
+...epoch time: 35.625251054763794s
+...epoch 1: train loss=0.47188038906782787
+...val accuracy= 0.7942233508019054
+...optimal threshold 0.268625
+...test loss: 0.3417
+...test accuracy: 0.7890
+---- Epoch 2 ----
+...epoch time: 34.860642194747925s
+...epoch 2: train loss=0.32165194361868416
+...val accuracy= 0.8103737683988252
+...optimal threshold 0.23162500000000003
+...test loss: 0.3145
+...test accuracy: 0.8051
+---- Epoch 3 ----
+...epoch time: 33.45332193374634s
+...epoch 3: train loss=0.30187618671475774
+...val accuracy= 0.8319290406352551
+...optimal threshold 0.239375
+...test loss: 0.2927
+...test accuracy: 0.8227
+---- Epoch 4 ----
+...epoch time: 33.79193902015686s
+...epoch 4: train loss=0.2935888319064284
+...val accuracy= 0.8265271714460338
+...optimal threshold 0.2
+...test loss: 0.3025
+...test accuracy: 0.8127
+---- Epoch 5 ----
+...epoch time: 34.186803102493286s
+...epoch 5: train loss=0.28828420114639164
+...val accuracy= 0.8342145834455579
+...optimal threshold 0.21175
+...test loss: 0.2901
+...test accuracy: 0.8246
+---- Epoch 6 ----
+...epoch time: 33.736334800720215s
+...epoch 6: train loss=0.28570776760501937
+...val accuracy= 0.8250321003304575
+...optimal threshold 0.2375
+...test loss: 0.3056
+...test accuracy: 0.8159
+---- Epoch 7 ----
+...epoch time: 33.92625164985657s
+...epoch 7: train loss=0.28331347351031533
+...val accuracy= 0.8434731061904766
+...optimal threshold 0.223875
+...test loss: 0.2759
+...test accuracy: 0.8334
+---- Epoch 8 ----
+...epoch time: 34.32595777511597s
+...epoch 8: train loss=0.281015612051615
+...val accuracy= 0.8399040764544402
+...optimal threshold 0.235375
+...test loss: 0.2841
+...test accuracy: 0.8303
+---- Epoch 9 ----
+...epoch time: 33.12237286567688s
+...epoch 9: train loss=0.27654820263309554
+...val accuracy= 0.843511876642143
+...optimal threshold 0.25175000000000003
+...test loss: 0.2720
+...test accuracy: 0.8347
+---- Epoch 10 ----
+...epoch time: 33.20011901855469s
+...epoch 10: train loss=0.27262282200024257
+...val accuracy= 0.850877453472394
+...optimal threshold 0.2635
+...test loss: 0.2718
+...test accuracy: 0.8405
+---- Epoch 11 ----
+...epoch time: 33.83962297439575s
+...epoch 11: train loss=0.27094741817325585
+...val accuracy= 0.8483739134821329
+...optimal threshold 0.24175
+...test loss: 0.2725
+...test accuracy: 0.8356
+---- Epoch 12 ----
+...epoch time: 33.882888078689575s
+...epoch 12: train loss=0.26889797667865556
+...val accuracy= 0.8558870074283214
+...optimal threshold 0.26875
+...test loss: 0.2615
+...test accuracy: 0.8451
+---- Epoch 13 ----
+...epoch time: 34.03577709197998s
+...epoch 13: train loss=0.2675142089652893
+...val accuracy= 0.8530378252809174
+...optimal threshold 0.239375
+...test loss: 0.2638
+...test accuracy: 0.8439
+---- Epoch 14 ----
+...epoch time: 33.35040307044983s
+...epoch 14: train loss=0.26367924295727857
+...val accuracy= 0.8470652175861435
+...optimal threshold 0.206875
+...test loss: 0.2763
+...test accuracy: 0.8422
+---- Epoch 15 ----
+...epoch time: 32.99701404571533s
+...epoch 15: train loss=0.2635682966474377
+...val accuracy= 0.8501902895637072
+...optimal threshold 0.21575000000000003
+...test loss: 0.2664
+...test accuracy: 0.8435
+---- Epoch 16 ----
+...epoch time: 35.089012145996094s
+...epoch 16: train loss=0.2581370080561589
+...val accuracy= 0.8638783851949434
+...optimal threshold 0.250125
+...test loss: 0.2576
+...test accuracy: 0.8588
+---- Epoch 17 ----
+...epoch time: 33.73612594604492s
+...epoch 17: train loss=0.24989494889059946
+...val accuracy= 0.8333952430020766
+...optimal threshold 0.236625
+...test loss: 0.2863
+...test accuracy: 0.8280
+---- Epoch 18 ----
+...epoch time: 33.8679678440094s
+...epoch 18: train loss=0.24349949901442394
+...val accuracy= 0.8529436073726542
+...optimal threshold 0.243875
+...test loss: 0.2665
+...test accuracy: 0.8432
+---- Epoch 19 ----
+...epoch time: 34.32257699966431s
+...epoch 19: train loss=0.2393578619831968
+...val accuracy= 0.8538669130964431
+...optimal threshold 0.20287500000000003
+...test loss: 0.2683
+...test accuracy: 0.8433
+---- Epoch 20 ----
+...epoch time: 33.301926136016846s
+...epoch 20: train loss=0.24083393497768876
+...val accuracy= 0.8724348816952443
+...optimal threshold 0.22400000000000003
+...test loss: 0.2393
+...test accuracy: 0.8644
+---- Epoch 21 ----
+...epoch time: 33.12243413925171s
+...epoch 21: train loss=0.23887828377354176
+...val accuracy= 0.8234725185204322
+...optimal threshold 0.1655
+...test loss: 0.3339
+...test accuracy: 0.8139
+---- Epoch 22 ----
+...epoch time: 33.76750683784485s
+...epoch 22: train loss=0.24069615283890453
+...val accuracy= 0.871697820158321
+...optimal threshold 0.29012499999999997
+...test loss: 0.2440
+...test accuracy: 0.8616
+---- Epoch 23 ----
+...epoch time: 34.25742793083191s
+...epoch 23: train loss=0.2364967333157654
+...val accuracy= 0.879463833220038
+...optimal threshold 0.31875
+...test loss: 0.2370
+...test accuracy: 0.8710
+---- Epoch 24 ----
+...epoch time: 33.14859700202942s
+...epoch 24: train loss=0.23808037973654544
+...val accuracy= 0.8818031883832133
+...optimal threshold 0.30625
+...test loss: 0.2252
+...test accuracy: 0.8764
+---- Epoch 25 ----
+...epoch time: 33.81726694107056s
+...epoch 25: train loss=0.2327589579593495
+...val accuracy= 0.8732622723510496
+...optimal threshold 0.284875
+...test loss: 0.2344
+...test accuracy: 0.8680
+---- Epoch 26 ----
+...epoch time: 33.626835107803345s
+...epoch 26: train loss=0.23194394575055602
+...val accuracy= 0.8797258827499974
+...optimal threshold 0.308375
+...test loss: 0.2250
+...test accuracy: 0.8735
+---- Epoch 27 ----
+...epoch time: 34.32589292526245s
+...epoch 27: train loss=0.2313964452851764
+...val accuracy= 0.885659146761484
+...optimal threshold 0.27337500000000003
+...test loss: 0.2296
+...test accuracy: 0.8753
+---- Epoch 28 ----
+...epoch time: 33.906431913375854s
+...epoch 28: train loss=0.2301969377281111
+...val accuracy= 0.8511857458053994
+...optimal threshold 0.233375
+...test loss: 0.2724
+...test accuracy: 0.8492
+---- Epoch 29 ----
+...epoch time: 32.973987102508545s
+...epoch 29: train loss=0.23156566731155376
+...val accuracy= 0.8852502654694601
+...optimal threshold 0.310125
+...test loss: 0.2231
+...test accuracy: 0.8760
+---- Epoch 30 ----
+...epoch time: 32.99046587944031s
+...epoch 30: train loss=0.23018021138427813
+...val accuracy= 0.8843585174254914
+...optimal threshold 0.28875000000000006
+...test loss: 0.2189
+...test accuracy: 0.8765
+---- Epoch 31 ----
+...epoch time: 33.237967014312744s
+...epoch 31: train loss=0.22799871896234009
+...val accuracy= 0.8261316315185274
+...optimal threshold 0.187
+...test loss: 0.3044
+...test accuracy: 0.8191
+---- Epoch 32 ----
+...epoch time: 34.158649921417236s
+...epoch 32: train loss=0.23454361443248245
+...val accuracy= 0.8818110607749526
+...optimal threshold 0.305375
+...test loss: 0.2263
+...test accuracy: 0.8739
+---- Epoch 33 ----
+...epoch time: 33.246304988861084s
+...epoch 33: train loss=0.22691794793547876
+...val accuracy= 0.8843606753764988
+...optimal threshold 0.277625
+...test loss: 0.2189
+...test accuracy: 0.8776
+---- Epoch 34 ----
+...epoch time: 33.03083896636963s
+...epoch 34: train loss=0.22591859847307205
+...val accuracy= 0.8811287951328606
+...optimal threshold 0.2585
+...test loss: 0.2301
+...test accuracy: 0.8707
+---- Epoch 35 ----
+...epoch time: 33.89617919921875s
+...epoch 35: train loss=0.22744340037979432
+...val accuracy= 0.8842985272077586
+...optimal threshold 0.26225
+...test loss: 0.2223
+...test accuracy: 0.8754
+---- Epoch 36 ----
+...epoch time: 33.8335120677948s
+...epoch 36: train loss=0.2265745047527506
+...val accuracy= 0.8795380206525512
+...optimal threshold 0.2931250000000001
+...test loss: 0.2310
+...test accuracy: 0.8706
+---- Epoch 37 ----
+...epoch time: 33.90958285331726s
+...epoch 37: train loss=0.22575854837818218
+...val accuracy= 0.8831409730384446
+...optimal threshold 0.27175000000000005
+...test loss: 0.2235
+...test accuracy: 0.8733
+---- Epoch 38 ----
+...epoch time: 34.27525877952576s
+...epoch 38: train loss=0.22410040543131207
+...val accuracy= 0.879972340816106
+...optimal threshold 0.260625
+...test loss: 0.2292
+...test accuracy: 0.8725
+---- Epoch 39 ----
+...epoch time: 33.04825687408447s
+...epoch 39: train loss=0.2263885090113296
+...val accuracy= 0.8836109075939975
+...optimal threshold 0.286875
+...test loss: 0.2180
+...test accuracy: 0.8783
+---- Epoch 40 ----
+...epoch time: 32.993191957473755s
+...epoch 40: train loss=0.2248103335271101
+...val accuracy= 0.8772680492797651
+...optimal threshold 0.242125
+...test loss: 0.2408
+...test accuracy: 0.8686
+---- Epoch 41 ----
+...epoch time: 32.994953870773315s
+...epoch 41: train loss=0.22333068204352924
+...val accuracy= 0.876149394425066
+...optimal threshold 0.232625
+...test loss: 0.2356
+...test accuracy: 0.8678
+---- Epoch 42 ----
+...epoch time: 33.34157419204712s
+...epoch 42: train loss=0.22313633090471063
+...val accuracy= 0.8848463210401741
+...optimal threshold 0.268875
+...test loss: 0.2223
+...test accuracy: 0.8761
+---- Epoch 43 ----
+...epoch time: 33.656651973724365s
+...epoch 43: train loss=0.22382749487524448
+...val accuracy= 0.887473920685581
+...optimal threshold 0.267625
+...test loss: 0.2137
+...test accuracy: 0.8803
+---- Epoch 44 ----
+...epoch time: 34.23254609107971s
+...epoch 44: train loss=0.22198503466365893
+...val accuracy= 0.8868096511915201
+...optimal threshold 0.28875
+...test loss: 0.2168
+...test accuracy: 0.8777
+---- Epoch 45 ----
+...epoch time: 33.005178928375244s
+...epoch 45: train loss=0.22429238276942
+...val accuracy= 0.8861868855559387
+...optimal threshold 0.2275
+...test loss: 0.2210
+...test accuracy: 0.8775
+---- Epoch 46 ----
+...epoch time: 33.05477023124695s
+...epoch 46: train loss=0.22292494114555056
+...val accuracy= 0.8857926274037153
+...optimal threshold 0.299875
+...test loss: 0.2143
+...test accuracy: 0.8797
+---- Epoch 47 ----
+...epoch time: 33.29551887512207s
+...epoch 47: train loss=0.22038682544475321
+...val accuracy= 0.8900731023235933
+...optimal threshold 0.283125
+...test loss: 0.2171
+...test accuracy: 0.8804
+---- Epoch 48 ----
+...epoch time: 33.62420582771301s
+...epoch 48: train loss=0.22230501189027602
+...val accuracy= 0.8892026175195564
+...optimal threshold 0.26275
+...test loss: 0.2134
+...test accuracy: 0.8809
+---- Epoch 49 ----
+...epoch time: 33.73586916923523s
+...epoch 49: train loss=0.22130599383579191
+...val accuracy= 0.8613398539872575
+...optimal threshold 0.249
+...test loss: 0.2515
+...test accuracy: 0.8526
+---- Epoch 50 ----
+...epoch time: 33.739402055740356s
+...epoch 50: train loss=0.21912658753831063
+...val accuracy= 0.8883024543191085
+...optimal threshold 0.298375
+...test loss: 0.2140
+...test accuracy: 0.8794
+---- Epoch 51 ----
+...epoch time: 34.34888815879822s
+...epoch 51: train loss=0.22040382023815
+...val accuracy= 0.8890600665178201
+...optimal threshold 0.28075
+...test loss: 0.2165
+...test accuracy: 0.8781
+---- Epoch 52 ----
+...epoch time: 33.324987173080444s
+...epoch 52: train loss=0.2193562860798348
+...val accuracy= 0.8797729214971073
+...optimal threshold 0.249
+...test loss: 0.2254
+...test accuracy: 0.8714
+---- Epoch 53 ----
+...epoch time: 32.99107503890991s
+...epoch 53: train loss=0.21817040144253874
+...val accuracy= 0.8876340452550476
+...optimal threshold 0.303125
+...test loss: 0.2184
+...test accuracy: 0.8799
+---- Epoch 54 ----
+...epoch time: 33.85640001296997s
+...epoch 54: train loss=0.21811683495026415
+...val accuracy= 0.8868203510230321
+...optimal threshold 0.25987499999999997
+...test loss: 0.2148
+...test accuracy: 0.8800
+---- Epoch 55 ----
+...epoch time: 34.210503816604614s
+...epoch 55: train loss=0.21812068528074133
+...val accuracy= 0.8763001544485376
+...optimal threshold 0.259
+...test loss: 0.2356
+...test accuracy: 0.8667
+---- Epoch 56 ----
+...epoch time: 33.12666583061218s
+...epoch 56: train loss=0.2175959153743961
+...val accuracy= 0.857861153598561
+...optimal threshold 0.255125
+...test loss: 0.2524
+...test accuracy: 0.8500
+---- Epoch 57 ----
+...epoch time: 33.164777994155884s
+...epoch 57: train loss=0.21678957343101501
+...val accuracy= 0.8899220279950433
+...optimal threshold 0.253625
+...test loss: 0.2118
+...test accuracy: 0.8821
+---- Epoch 58 ----
+...epoch time: 33.00380611419678s
+...epoch 58: train loss=0.21597859389184382
+...val accuracy= 0.8880403572009553
+...optimal threshold 0.2851250000000001
+...test loss: 0.2130
+...test accuracy: 0.8807
+---- Epoch 59 ----
+...epoch time: 33.18257689476013s
+...epoch 59: train loss=0.2168190907067655
+...val accuracy= 0.8903481464275014
+...optimal threshold 0.2585
+...test loss: 0.2130
+...test accuracy: 0.8826
+---- Epoch 60 ----
+...epoch time: 33.90928101539612s
+...epoch 60: train loss=0.2163196671420656
+...val accuracy= 0.8892024597976249
+...optimal threshold 0.294625
+...test loss: 0.2136
+...test accuracy: 0.8822
+---- Epoch 61 ----
+...epoch time: 34.16454291343689s
+...epoch 61: train loss=0.21693446134667263
+...val accuracy= 0.8899378874191345
+...optimal threshold 0.256375
+...test loss: 0.2118
+...test accuracy: 0.8804
+---- Epoch 62 ----
+...epoch time: 33.285834074020386s
+...epoch 62: train loss=0.2166972219410455
+...val accuracy= 0.8912387016813408
+...optimal threshold 0.282375
+...test loss: 0.2103
+...test accuracy: 0.8836
+---- Epoch 63 ----
+...epoch time: 33.62651014328003s
+...epoch 63: train loss=0.2145327117932422
+...val accuracy= 0.8847217794623736
+...optimal threshold 0.29000000000000004
+...test loss: 0.2114
+...test accuracy: 0.8794
+---- Epoch 64 ----
+...epoch time: 33.86654090881348s
+...epoch 64: train loss=0.2169185560720656
+...val accuracy= 0.8486656091230724
+...optimal threshold 0.23475000000000001
+...test loss: 0.2704
+...test accuracy: 0.8425
+---- Epoch 65 ----
+...epoch time: 34.29957294464111s
+...epoch 65: train loss=0.2141641026453289
+...val accuracy= 0.884762210120698
+...optimal threshold 0.289625
+...test loss: 0.2189
+...test accuracy: 0.8770
+---- Epoch 66 ----
+...epoch time: 33.1770601272583s
+...epoch 66: train loss=0.21403139073144445
+...val accuracy= 0.8886007465734214
+...optimal threshold 0.28150000000000003
+...test loss: 0.2102
+...test accuracy: 0.8818
+---- Epoch 67 ----
+...epoch time: 33.15590500831604s
+...epoch 67: train loss=0.21461665178732495
+...val accuracy= 0.8905049026084589
+...optimal threshold 0.272125
+...test loss: 0.2096
+...test accuracy: 0.8837
+---- Epoch 68 ----
+...epoch time: 34.744131088256836s
+...epoch 68: train loss=0.21306950652309695
+...val accuracy= 0.8867470100656807
+...optimal threshold 0.2675
+...test loss: 0.2178
+...test accuracy: 0.8777
+---- Epoch 69 ----
+...epoch time: 34.54001784324646s
+...epoch 69: train loss=0.21405555637519988
+...val accuracy= 0.8864020627545957
+...optimal threshold 0.27487500000000004
+...test loss: 0.2177
+...test accuracy: 0.8794
+---- Epoch 70 ----
+...epoch time: 34.384997844696045s
+...epoch 70: train loss=0.21434739201574984
+...val accuracy= 0.8929547008684164
+...optimal threshold 0.270875
+...test loss: 0.2076
+...test accuracy: 0.8849
+---- Epoch 71 ----
+...epoch time: 33.2384078502655s
+...epoch 71: train loss=0.213122234243871
+...val accuracy= 0.8898559989425652
+...optimal threshold 0.28737500000000005
+...test loss: 0.2083
+...test accuracy: 0.8828
+---- Epoch 72 ----
+...epoch time: 33.47899389266968s
+...epoch 72: train loss=0.21293342115400393
+...val accuracy= 0.8864896825086417
+...optimal threshold 0.26112500000000005
+...test loss: 0.2133
+...test accuracy: 0.8820
+---- Epoch 73 ----
+...epoch time: 33.15751385688782s
+...epoch 73: train loss=0.21158885612817066
+...val accuracy= 0.8575401984805092
+...optimal threshold 0.18387499999999998
+...test loss: 0.2819
+...test accuracy: 0.8469
+---- Epoch 74 ----
+...epoch time: 33.00039505958557s
+...epoch 74: train loss=0.21300357353428137
+...val accuracy= 0.8908961903128201
+...optimal threshold 0.3005
+...test loss: 0.2090
+...test accuracy: 0.8836
+---- Epoch 75 ----
+...epoch time: 33.177980184555054s
+...epoch 75: train loss=0.21221527108527205
+...val accuracy= 0.8919143647451919
+...optimal threshold 0.26575000000000004
+...test loss: 0.2096
+...test accuracy: 0.8849
+---- Epoch 76 ----
+...epoch time: 33.79720592498779s
+...epoch 76: train loss=0.2125957938640014
+...val accuracy= 0.8927698369100194
+...optimal threshold 0.272875
+...test loss: 0.2055
+...test accuracy: 0.8852
+---- Epoch 77 ----
+...epoch time: 34.01552700996399s
+...epoch 77: train loss=0.2121575654429548
+...val accuracy= 0.8896689524630483
+...optimal threshold 0.309375
+...test loss: 0.2104
+...test accuracy: 0.8828
+---- Epoch 78 ----
+...epoch time: 34.017935037612915s
+...epoch 78: train loss=0.21230837643680062
+...val accuracy= 0.8883568896088241
+...optimal threshold 0.25112500000000004
+...test loss: 0.2140
+...test accuracy: 0.8809
+---- Epoch 79 ----
+...epoch time: 34.43915605545044s
+...epoch 79: train loss=0.21075084757850604
+...val accuracy= 0.8848565414192262
+...optimal threshold 0.25375000000000003
+...test loss: 0.2196
+...test accuracy: 0.8771
+---- Epoch 80 ----
+...epoch time: 33.056067943573s
+...epoch 80: train loss=0.210979519731096
+...val accuracy= 0.8902963875196797
+...optimal threshold 0.2865
+...test loss: 0.2125
+...test accuracy: 0.8811
+---- Epoch 81 ----
+...epoch time: 33.170681953430176s
+...epoch 81: train loss=0.210106623961645
+...val accuracy= 0.8939425812556577
+...optimal threshold 0.291375
+...test loss: 0.2096
+...test accuracy: 0.8841
+---- Epoch 82 ----
+...epoch time: 33.761481046676636s
+...epoch 82: train loss=0.21075072560621344
+...val accuracy= 0.8843357731268482
+...optimal threshold 0.2485
+...test loss: 0.2245
+...test accuracy: 0.8752
+---- Epoch 83 ----
+...epoch time: 33.53142285346985s
+...epoch 83: train loss=0.20984382325273646
+...val accuracy= 0.8949414342492243
+...optimal threshold 0.2545
+...test loss: 0.2067
+...test accuracy: 0.8857
+---- Epoch 84 ----
+...epoch time: 34.15700387954712s
+...epoch 84: train loss=0.21009834562344928
+...val accuracy= 0.8913666703941445
+...optimal threshold 0.253375
+...test loss: 0.2076
+...test accuracy: 0.8843
+---- Epoch 85 ----
+...epoch time: 34.402865171432495s
+...epoch 85: train loss=0.20935994943084618
+...val accuracy= 0.8934998514843056
+...optimal threshold 0.254125
+...test loss: 0.2081
+...test accuracy: 0.8856
+---- Epoch 86 ----
+...epoch time: 33.23045778274536s
+...epoch 86: train loss=0.20954327182391722
+...val accuracy= 0.8938404956558503
+...optimal threshold 0.28037500000000004
+...test loss: 0.2042
+...test accuracy: 0.8863
+---- Epoch 87 ----
+...epoch time: 33.0617949962616s
+...epoch 87: train loss=0.20875853587828025
+...val accuracy= 0.8720492175415859
+...optimal threshold 0.20487500000000003
+...test loss: 0.2442
+...test accuracy: 0.8605
+---- Epoch 88 ----
+...epoch time: 33.155025005340576s
+...epoch 88: train loss=0.2114088154204971
+...val accuracy= 0.8921542332936523
+...optimal threshold 0.26225
+...test loss: 0.2099
+...test accuracy: 0.8838
+---- Epoch 89 ----
+...epoch time: 33.40677499771118s
+...epoch 89: train loss=0.20728957660667732
+...val accuracy= 0.8930532698478619
+...optimal threshold 0.292625
+...test loss: 0.2057
+...test accuracy: 0.8834
+---- Epoch 90 ----
+...epoch time: 33.11382579803467s
+...epoch 90: train loss=0.2083838159775795
+...val accuracy= 0.8944622932452341
+...optimal threshold 0.30425
+...test loss: 0.2104
+...test accuracy: 0.8833
+---- Epoch 91 ----
+...epoch time: 33.885418176651s
+...epoch 91: train loss=0.20788080089003838
+...val accuracy= 0.8961141665621266
+...optimal threshold 0.29075
+...test loss: 0.2060
+...test accuracy: 0.8851
+---- Epoch 92 ----
+...epoch time: 33.97398114204407s
+...epoch 92: train loss=0.20769724066909925
+...val accuracy= 0.8945407069058765
+...optimal threshold 0.26075000000000004
+...test loss: 0.2062
+...test accuracy: 0.8860
+---- Epoch 93 ----
+...epoch time: 34.071033000946045s
+...epoch 93: train loss=0.20871729180788445
+...val accuracy= 0.8952783267758262
+...optimal threshold 0.279875
+...test loss: 0.2051
+...test accuracy: 0.8852
+---- Epoch 94 ----
+...epoch time: 34.50778412818909s
+...epoch 94: train loss=0.2075444239446574
+...val accuracy= 0.8963245226253537
+...optimal threshold 0.2855
+...test loss: 0.2083
+...test accuracy: 0.8851
+---- Epoch 95 ----
+...epoch time: 33.23054480552673s
+...epoch 95: train loss=0.20944261600446823
+...val accuracy= 0.8927967987019809
+...optimal threshold 0.25525
+...test loss: 0.2103
+...test accuracy: 0.8838
+---- Epoch 96 ----
+...epoch time: 33.577189207077026s
+...epoch 96: train loss=0.20703148919984202
+...val accuracy= 0.8906446047887568
+...optimal threshold 0.28337500000000004
+...test loss: 0.2065
+...test accuracy: 0.8838
+---- Epoch 97 ----
+...epoch time: 33.99193501472473s
+...epoch 97: train loss=0.2061168823934272
+...val accuracy= 0.8949266647425708
+...optimal threshold 0.264875
+...test loss: 0.2027
+...test accuracy: 0.8861
+---- Epoch 98 ----
+...epoch time: 34.20972275733948s
+...epoch 98: train loss=0.20664412467299825
+...val accuracy= 0.8967787786263348
+...optimal threshold 0.253125
+...test loss: 0.2022
+...test accuracy: 0.8878
+---- Epoch 99 ----
+...epoch time: 33.30271577835083s
+...epoch 99: train loss=0.20756376168840682
+...val accuracy= 0.8957967135228475
+...optimal threshold 0.259625
+...test loss: 0.2058
+...test accuracy: 0.8848
+---- Epoch 100 ----
+...epoch time: 33.22702407836914s
+...epoch 100: train loss=0.20577859947138735
+...val accuracy= 0.8800258986525663
+...optimal threshold 0.230375
+...test loss: 0.2284
+...test accuracy: 0.8707

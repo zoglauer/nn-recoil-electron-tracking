@@ -169,7 +169,7 @@ def save_pred_projections(
                 color = "green" if -1 < i-j < 1 else "orange"
             add_quiver(j, i, color=color)
 
-    plt.legend(loc="upper left")
+    plt.legend(["test"], loc="upper left")
 
     ds_hash = abs(hash(data))
     if not save_file:

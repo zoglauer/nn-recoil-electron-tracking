@@ -3,7 +3,9 @@
 *.sim.gz
 python-env/
 
-
+*.pt
+*.bin
+*.png
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

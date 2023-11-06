@@ -33,11 +33,6 @@ echo "Starting analysis on host ${HOSTNAME} with job ID ${SLURM_JOB_ID}..."
 #================================================================================
 
 apptainer run container.sif
-nvcc --version
-pip3 install torch-scatter torch-sparse torch-cluster torch-spline-conv torch-geometric -f https://data.pyg.org/whl/torch-1.9.0+cu111.html
-pip3 install --user -r Requirements.txt
-
-python3 interaction_network/train.py
 
 #================================================================================
 echo "Batch Completed"

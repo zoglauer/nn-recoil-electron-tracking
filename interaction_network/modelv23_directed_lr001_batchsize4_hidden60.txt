@@ -1,0 +1,154 @@
+torch v1.12.1
+use_cuda=False
+total trainable params: 13508
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    eps: 1e-08
+    foreach: None
+    lr: 0.0001
+    maximize: False
+    weight_decay: 0
+)
+scheduler ( 
+	gamma: 0.8
+	step size: 8
+)
+Double Depth: False
+---- Epoch 1 ----
+...epoch time: 164.21515798568726s
+...epoch 1: train loss=0.3168616653302312
+...val accuracy= 0.8717720389045024
+...optimal threshold 0.253152
+...test loss: 0.2717
+...test accuracy: 0.8637
+---- Epoch 2 ----
+...epoch time: 162.09833407402039s
+...epoch 2: train loss=0.26487863413155077
+...val accuracy= 0.8790848297164875
+...optimal threshold 0.27883600000000003
+...test loss: 0.2544
+...test accuracy: 0.8656
+---- Epoch 3 ----
+...epoch time: 148.34459686279297s
+...epoch 3: train loss=0.2490962179949507
+...val accuracy= 0.8804433553765106
+...optimal threshold 0.27732799999999996
+...test loss: 0.2472
+...test accuracy: 0.8675
+---- Epoch 4 ----
+...epoch time: 147.63776898384094s
+...epoch 4: train loss=0.24232439534462988
+...val accuracy= 0.8935454046674021
+...optimal threshold 0.266564
+...test loss: 0.2365
+...test accuracy: 0.8750
+---- Epoch 5 ----
+...epoch time: 471.83521723747253s
+...epoch 5: train loss=0.23723952767696233
+...val accuracy= 0.8955950646565709
+...optimal threshold 0.259108
+...test loss: 0.2334
+...test accuracy: 0.8714
+---- Epoch 6 ----
+...epoch time: 362.56597805023193s
+...epoch 6: train loss=0.23479659459633753
+...val accuracy= 0.8948990318341227
+...optimal threshold 0.26241600000000004
+...test loss: 0.2274
+...test accuracy: 0.8777
+---- Epoch 7 ----
+...epoch time: 153.40749311447144s
+...epoch 7: train loss=0.2317263562418334
+...val accuracy= 0.8899875464163153
+...optimal threshold 0.25726
+...test loss: 0.2345
+...test accuracy: 0.8737
+---- Epoch 8 ----
+...epoch time: 159.2190580368042s
+...epoch 8: train loss=0.22897102156331764
+...val accuracy= 0.8970946203221665
+...optimal threshold 0.23918
+...test loss: 0.2261
+...test accuracy: 0.8779
+---- Epoch 9 ----
+...epoch time: 157.66357898712158s
+...epoch 9: train loss=0.22639006420547142
+...val accuracy= 0.8979326266420021
+...optimal threshold 0.252996
+...test loss: 0.2251
+...test accuracy: 0.8765
+---- Epoch 10 ----
+...epoch time: 153.20167088508606s
+...epoch 10: train loss=0.2251261766986642
+...val accuracy= 0.899450319893401
+...optimal threshold 0.259404
+...test loss: 0.2241
+...test accuracy: 0.8810
+---- Epoch 11 ----
+...epoch time: 1840.1239559650421s
+...epoch 11: train loss=0.2250543991330266
+...val accuracy= 0.8960500909827427
+...optimal threshold 0.241976
+torch v1.12.1
+use_cuda=False
+total trainable params: 13508
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    eps: 1e-08
+    foreach: None
+    lr: 0.0001
+    maximize: False
+    weight_decay: 0
+)
+scheduler ( 
+	gamma: 0.8
+	step size: 8
+)
+Double Depth: False
+Resuming at epoch 11
+torch v1.12.1
+use_cuda=False
+total trainable params: 13508
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    eps: 1e-08
+    foreach: None
+    lr: 0.0001
+    maximize: False
+    weight_decay: 0
+)
+scheduler ( 
+	gamma: 0.8
+	step size: 8
+)
+Double Depth: False
+Resuming at epoch 10
+torch v1.12.1
+use_cuda=False
+total trainable params: 13508
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    eps: 1e-08
+    foreach: None
+    lr: 0.0001
+    maximize: False
+    weight_decay: 0
+)
+scheduler ( 
+	gamma: 0.8
+	step size: 8
+)
+Double Depth: False
+---- Epoch 1 ----

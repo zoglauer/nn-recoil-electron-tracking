@@ -173,7 +173,7 @@ def main():
 
     if args.resume:
         output = torch.load(f"{args.model_iteration}/loss_dict.bin")
-        start_epoch = len(output['train_loss']) + 1
+        start_epoch = len(output['train_loss'])
         print(f"Resuming at epoch {start_epoch}")
         model_state_dict = torch.load(f"{args.model_iteration}/model_epoch_{start_epoch-1}.pt")
         model = InteractionNetwork(args.hidden_size)

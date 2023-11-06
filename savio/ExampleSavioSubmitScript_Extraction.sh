@@ -36,7 +36,3 @@ python3 -u /global/home/users/rbohra/RecoilElectronTracking/EventExtractor.py -m
 
 echo "Waiting for all processes to end..."
 wait
-
-
-
-wait

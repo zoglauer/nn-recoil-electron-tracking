@@ -1,0 +1,715 @@
+torch v1.12.1
+use_cuda=False
+total trainable params: 14330
+Adam (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    eps: 1e-08
+    foreach: None
+    lr: 0.0001
+    maximize: False
+    weight_decay: 0
+)
+scheduler ( 
+	gamma: 0.8
+	step size: 8
+)
+---- Epoch 1 ----
+15 210
+15 210
+Train Epoch: 1 [0/100000 (0%)]	Loss: 0.055845
+...epoch time: 98.06712436676025s
+...epoch 1: train loss=0.038261878861607986
+...test loss: 0.0366
+---- Epoch 2 ----
+15 210
+15 210
+Train Epoch: 2 [0/100000 (0%)]	Loss: 0.032448
+...epoch time: 97.08662033081055s
+...epoch 2: train loss=0.03625284960693214
+...test loss: 0.0363
+---- Epoch 3 ----
+15 210
+15 210
+Train Epoch: 3 [0/100000 (0%)]	Loss: 0.041758
+...epoch time: 93.45484185218811s
+...epoch 3: train loss=0.03608618443091633
+...test loss: 0.0362
+---- Epoch 4 ----
+15 210
+15 210
+Train Epoch: 4 [0/100000 (0%)]	Loss: 0.010870
+...epoch time: 95.16018891334534s
+...epoch 4: train loss=0.0359465270804544
+...test loss: 0.0360
+---- Epoch 5 ----
+15 210
+15 210
+Train Epoch: 5 [0/100000 (0%)]	Loss: 0.025268
+...epoch time: 85.83384203910828s
+...epoch 5: train loss=0.03591282345619984
+...test loss: 0.0360
+---- Epoch 6 ----
+15 210
+15 210
+Train Epoch: 6 [0/100000 (0%)]	Loss: 0.034164
+...epoch time: 81.26346397399902s
+...epoch 6: train loss=0.03583693007332506
+...test loss: 0.0360
+---- Epoch 7 ----
+15 210
+15 210
+Train Epoch: 7 [0/100000 (0%)]	Loss: 0.026931
+...epoch time: 107.28687524795532s
+...epoch 7: train loss=0.03580792351854965
+...test loss: 0.0359
+---- Epoch 8 ----
+15 210
+15 210
+Train Epoch: 8 [0/100000 (0%)]	Loss: 0.039825
+...epoch time: 93.57220506668091s
+...epoch 8: train loss=0.03574144990124972
+...test loss: 0.0359
+---- Epoch 9 ----
+15 210
+15 210
+Train Epoch: 9 [0/100000 (0%)]	Loss: 0.105303
+...epoch time: 80.07794904708862s
+...epoch 9: train loss=0.03568549392057583
+...test loss: 0.0358
+---- Epoch 10 ----
+15 210
+15 210
+Train Epoch: 10 [0/100000 (0%)]	Loss: 0.037830
+...epoch time: 86.64181303977966s
+...epoch 10: train loss=0.03566943138634553
+...test loss: 0.0358
+---- Epoch 11 ----
+15 210
+15 210
+Train Epoch: 11 [0/100000 (0%)]	Loss: 0.015324
+...epoch time: 75.64657092094421s
+...epoch 11: train loss=0.035616396371088925
+...test loss: 0.0357
+---- Epoch 12 ----
+15 210
+15 210
+Train Epoch: 12 [0/100000 (0%)]	Loss: 0.019123
+...epoch time: 72.07334971427917s
+...epoch 12: train loss=0.0356001607712009
+...test loss: 0.0357
+---- Epoch 13 ----
+15 210
+15 210
+Train Epoch: 13 [0/100000 (0%)]	Loss: 0.036985
+...epoch time: 63.138179779052734s
+...epoch 13: train loss=0.035584759347836954
+...test loss: 0.0357
+---- Epoch 14 ----
+15 210
+15 210
+Train Epoch: 14 [0/100000 (0%)]	Loss: 0.010555
+...epoch time: 64.3406720161438s
+...epoch 14: train loss=0.035534473470456435
+...test loss: 0.0357
+---- Epoch 15 ----
+15 210
+15 210
+Train Epoch: 15 [0/100000 (0%)]	Loss: 0.032641
+...epoch time: 64.36049699783325s
+...epoch 15: train loss=0.03552439891148475
+...test loss: 0.0356
+---- Epoch 16 ----
+15 210
+15 210
+Train Epoch: 16 [0/100000 (0%)]	Loss: 0.019782
+...epoch time: 63.98960900306702s
+...epoch 16: train loss=0.035494261535836846
+...test loss: 0.0356
+---- Epoch 17 ----
+15 210
+15 210
+Train Epoch: 17 [0/100000 (0%)]	Loss: 0.036163
+...epoch time: 61.396830797195435s
+...epoch 17: train loss=0.03549631259937771
+...test loss: 0.0356
+---- Epoch 18 ----
+15 210
+15 210
+Train Epoch: 18 [0/100000 (0%)]	Loss: 0.016713
+...epoch time: 62.53271508216858s
+...epoch 18: train loss=0.0354707194577856
+...test loss: 0.0356
+---- Epoch 19 ----
+15 210
+15 210
+Train Epoch: 19 [0/100000 (0%)]	Loss: 0.032581
+...epoch time: 64.56870126724243s
+...epoch 19: train loss=0.035463350700780286
+...test loss: 0.0356
+---- Epoch 20 ----
+15 210
+15 210
+Train Epoch: 20 [0/100000 (0%)]	Loss: 0.022098
+...epoch time: 61.417418003082275s
+...epoch 20: train loss=0.035439284693143565
+...test loss: 0.0356
+---- Epoch 21 ----
+15 210
+15 210
+Train Epoch: 21 [0/100000 (0%)]	Loss: 0.027759
+...epoch time: 60.76876974105835s
+...epoch 21: train loss=0.03542997208366636
+...test loss: 0.0355
+---- Epoch 22 ----
+15 210
+15 210
+Train Epoch: 22 [0/100000 (0%)]	Loss: 0.053013
+...epoch time: 60.68450689315796s
+...epoch 22: train loss=0.03542349361485336
+...test loss: 0.0355
+---- Epoch 23 ----
+15 210
+15 210
+Train Epoch: 23 [0/100000 (0%)]	Loss: 0.029726
+...epoch time: 62.11430501937866s
+...epoch 23: train loss=0.03545206411175779
+...test loss: 0.0355
+---- Epoch 24 ----
+15 210
+15 210
+Train Epoch: 24 [0/100000 (0%)]	Loss: 0.037358
+...epoch time: 61.83670210838318s
+...epoch 24: train loss=0.03540151961459546
+...test loss: 0.0355
+---- Epoch 25 ----
+15 210
+15 210
+Train Epoch: 25 [0/100000 (0%)]	Loss: 0.058214
+...epoch time: 63.22350192070007s
+...epoch 25: train loss=0.035388383840599565
+...test loss: 0.0355
+---- Epoch 26 ----
+15 210
+15 210
+Train Epoch: 26 [0/100000 (0%)]	Loss: 0.021461
+...epoch time: 62.70778012275696s
+...epoch 26: train loss=0.03534247932670289
+...test loss: 0.0355
+---- Epoch 27 ----
+15 210
+15 210
+Train Epoch: 27 [0/100000 (0%)]	Loss: 0.051253
+...epoch time: 62.030153036117554s
+...epoch 27: train loss=0.03535094171394594
+...test loss: 0.0355
+---- Epoch 28 ----
+15 210
+15 210
+Train Epoch: 28 [0/100000 (0%)]	Loss: 0.047591
+...epoch time: 63.584827184677124s
+...epoch 28: train loss=0.03536565680146916
+...test loss: 0.0355
+---- Epoch 29 ----
+15 210
+15 210
+Train Epoch: 29 [0/100000 (0%)]	Loss: 0.040634
+...epoch time: 62.491395711898804s
+...epoch 29: train loss=0.03531734390530037
+...test loss: 0.0355
+---- Epoch 30 ----
+15 210
+15 210
+Train Epoch: 30 [0/100000 (0%)]	Loss: 0.064201
+...epoch time: 61.91079306602478s
+...epoch 30: train loss=0.03528466940374929
+...test loss: 0.0354
+---- Epoch 31 ----
+15 210
+15 210
+Train Epoch: 31 [0/100000 (0%)]	Loss: 0.020584
+...epoch time: 61.52228879928589s
+...epoch 31: train loss=0.03531728463302599
+...test loss: 0.0354
+---- Epoch 32 ----
+15 210
+15 210
+Train Epoch: 32 [0/100000 (0%)]	Loss: 0.033482
+...epoch time: 61.764477252960205s
+...epoch 32: train loss=0.035254871586925585
+...test loss: 0.0354
+---- Epoch 33 ----
+15 210
+15 210
+Train Epoch: 33 [0/100000 (0%)]	Loss: 0.010770
+...epoch time: 60.80136013031006s
+...epoch 33: train loss=0.035247667229207
+...test loss: 0.0354
+---- Epoch 34 ----
+15 210
+15 210
+Train Epoch: 34 [0/100000 (0%)]	Loss: 0.008234
+...epoch time: 61.0623459815979s
+...epoch 34: train loss=0.03522193564716959
+...test loss: 0.0354
+---- Epoch 35 ----
+15 210
+15 210
+Train Epoch: 35 [0/100000 (0%)]	Loss: 0.047219
+...epoch time: 60.70595693588257s
+...epoch 35: train loss=0.0352056070269784
+...test loss: 0.0353
+---- Epoch 36 ----
+15 210
+15 210
+Train Epoch: 36 [0/100000 (0%)]	Loss: 0.005216
+...epoch time: 60.20631718635559s
+...epoch 36: train loss=0.03518285051705083
+...test loss: 0.0353
+---- Epoch 37 ----
+15 210
+15 210
+Train Epoch: 37 [0/100000 (0%)]	Loss: 0.057139
+...epoch time: 60.90060591697693s
+...epoch 37: train loss=0.0352000937494752
+...test loss: 0.0353
+---- Epoch 38 ----
+15 210
+15 210
+Train Epoch: 38 [0/100000 (0%)]	Loss: 0.030441
+...epoch time: 60.243677854537964s
+...epoch 38: train loss=0.03519691502224654
+...test loss: 0.0353
+---- Epoch 39 ----
+15 210
+15 210
+Train Epoch: 39 [0/100000 (0%)]	Loss: 0.031680
+...epoch time: 59.86258888244629s
+...epoch 39: train loss=0.03517956588471075
+...test loss: 0.0353
+---- Epoch 40 ----
+15 210
+15 210
+Train Epoch: 40 [0/100000 (0%)]	Loss: 0.005211
+...epoch time: 59.93040204048157s
+...epoch 40: train loss=0.03515377512137173
+...test loss: 0.0353
+---- Epoch 41 ----
+15 210
+15 210
+Train Epoch: 41 [0/100000 (0%)]	Loss: 0.019930
+...epoch time: 60.10679388046265s
+...epoch 41: train loss=0.03513453751081601
+...test loss: 0.0353
+---- Epoch 42 ----
+15 210
+15 210
+Train Epoch: 42 [0/100000 (0%)]	Loss: 0.051691
+...epoch time: 61.027933835983276s
+...epoch 42: train loss=0.03512891112180892
+...test loss: 0.0352
+---- Epoch 43 ----
+15 210
+15 210
+Train Epoch: 43 [0/100000 (0%)]	Loss: 0.041449
+...epoch time: 62.127124071121216s
+...epoch 43: train loss=0.035099890919271855
+...test loss: 0.0353
+---- Epoch 44 ----
+15 210
+15 210
+Train Epoch: 44 [0/100000 (0%)]	Loss: 0.023141
+...epoch time: 63.484508752822876s
+...epoch 44: train loss=0.03511862483185483
+...test loss: 0.0352
+---- Epoch 45 ----
+15 210
+15 210
+Train Epoch: 45 [0/100000 (0%)]	Loss: 0.023554
+...epoch time: 61.68394494056702s
+...epoch 45: train loss=0.03509845437614131
+...test loss: 0.0352
+---- Epoch 46 ----
+15 210
+15 210
+Train Epoch: 46 [0/100000 (0%)]	Loss: 0.040367
+...epoch time: 62.949689865112305s
+...epoch 46: train loss=0.03506400312143262
+...test loss: 0.0352
+---- Epoch 47 ----
+15 210
+15 210
+Train Epoch: 47 [0/100000 (0%)]	Loss: 0.056726
+...epoch time: 61.997814893722534s
+...epoch 47: train loss=0.03508493724365951
+...test loss: 0.0352
+---- Epoch 48 ----
+15 210
+15 210
+Train Epoch: 48 [0/100000 (0%)]	Loss: 0.015990
+...epoch time: 61.20942711830139s
+...epoch 48: train loss=0.03504523594963481
+...test loss: 0.0352
+---- Epoch 49 ----
+15 210
+15 210
+Train Epoch: 49 [0/100000 (0%)]	Loss: 0.014377
+...epoch time: 61.44749188423157s
+...epoch 49: train loss=0.035008352820198055
+...test loss: 0.0351
+---- Epoch 50 ----
+15 210
+15 210
+Train Epoch: 50 [0/100000 (0%)]	Loss: 0.022272
+...epoch time: 61.39996314048767s
+...epoch 50: train loss=0.0350251615601941
+...test loss: 0.0351
+---- Epoch 51 ----
+15 210
+15 210
+Train Epoch: 51 [0/100000 (0%)]	Loss: 0.036320
+...epoch time: 61.245107889175415s
+...epoch 51: train loss=0.035055211298090874
+...test loss: 0.0351
+---- Epoch 52 ----
+15 210
+15 210
+Train Epoch: 52 [0/100000 (0%)]	Loss: 0.059210
+...epoch time: 60.53381896018982s
+...epoch 52: train loss=0.03497921435501892
+...test loss: 0.0351
+---- Epoch 53 ----
+15 210
+15 210
+Train Epoch: 53 [0/100000 (0%)]	Loss: 0.030697
+...epoch time: 60.15364599227905s
+...epoch 53: train loss=0.03495291375076748
+...test loss: 0.0351
+---- Epoch 54 ----
+15 210
+15 210
+Train Epoch: 54 [0/100000 (0%)]	Loss: 0.054801
+...epoch time: 60.89911985397339s
+...epoch 54: train loss=0.03499908359437133
+...test loss: 0.0351
+---- Epoch 55 ----
+15 210
+15 210
+Train Epoch: 55 [0/100000 (0%)]	Loss: 0.048956
+...epoch time: 60.76736497879028s
+...epoch 55: train loss=0.034957311693161026
+...test loss: 0.0351
+---- Epoch 56 ----
+15 210
+15 210
+Train Epoch: 56 [0/100000 (0%)]	Loss: 0.029044
+...epoch time: 60.38902807235718s
+...epoch 56: train loss=0.03496228278572904
+...test loss: 0.0351
+---- Epoch 57 ----
+15 210
+15 210
+Train Epoch: 57 [0/100000 (0%)]	Loss: 0.040464
+...epoch time: 60.42179203033447s
+...epoch 57: train loss=0.03490620078810258
+...test loss: 0.0351
+---- Epoch 58 ----
+15 210
+15 210
+Train Epoch: 58 [0/100000 (0%)]	Loss: 0.023228
+...epoch time: 60.10606384277344s
+...epoch 58: train loss=0.034949425368125085
+...test loss: 0.0350
+---- Epoch 59 ----
+15 210
+15 210
+Train Epoch: 59 [0/100000 (0%)]	Loss: 0.045647
+...epoch time: 60.07006096839905s
+...epoch 59: train loss=0.034945691805836974
+...test loss: 0.0351
+---- Epoch 60 ----
+15 210
+15 210
+Train Epoch: 60 [0/100000 (0%)]	Loss: 0.040123
+...epoch time: 60.71838426589966s
+...epoch 60: train loss=0.03497318817918654
+...test loss: 0.0350
+---- Epoch 61 ----
+15 210
+15 210
+Train Epoch: 61 [0/100000 (0%)]	Loss: 0.029090
+...epoch time: 61.39019989967346s
+...epoch 61: train loss=0.03487297296896693
+...test loss: 0.0350
+---- Epoch 62 ----
+15 210
+15 210
+Train Epoch: 62 [0/100000 (0%)]	Loss: 0.031330
+...epoch time: 61.7652223110199s
+...epoch 62: train loss=0.03490678516502434
+...test loss: 0.0350
+---- Epoch 63 ----
+15 210
+15 210
+Train Epoch: 63 [0/100000 (0%)]	Loss: 0.047350
+...epoch time: 61.89980697631836s
+...epoch 63: train loss=0.034869405765701085
+...test loss: 0.0350
+---- Epoch 64 ----
+15 210
+15 210
+Train Epoch: 64 [0/100000 (0%)]	Loss: 0.073818
+...epoch time: 61.7907509803772s
+...epoch 64: train loss=0.03487546427298221
+...test loss: 0.0350
+---- Epoch 65 ----
+15 210
+15 210
+Train Epoch: 65 [0/100000 (0%)]	Loss: 0.049926
+...epoch time: 64.21418118476868s
+...epoch 65: train loss=0.03486984635091037
+...test loss: 0.0350
+---- Epoch 66 ----
+15 210
+15 210
+Train Epoch: 66 [0/100000 (0%)]	Loss: 0.034359
+...epoch time: 62.89247512817383s
+...epoch 66: train loss=0.03489380802622414
+...test loss: 0.0350
+---- Epoch 67 ----
+15 210
+15 210
+Train Epoch: 67 [0/100000 (0%)]	Loss: 0.032028
+...epoch time: 62.03142213821411s
+...epoch 67: train loss=0.03489076086337329
+...test loss: 0.0350
+---- Epoch 68 ----
+15 210
+15 210
+Train Epoch: 68 [0/100000 (0%)]	Loss: 0.045521
+...epoch time: 61.7506639957428s
+...epoch 68: train loss=0.03492951323426794
+...test loss: 0.0350
+---- Epoch 69 ----
+15 210
+15 210
+Train Epoch: 69 [0/100000 (0%)]	Loss: 0.043288
+...epoch time: 61.36483311653137s
+...epoch 69: train loss=0.03484128818146768
+...test loss: 0.0350
+---- Epoch 70 ----
+15 210
+15 210
+Train Epoch: 70 [0/100000 (0%)]	Loss: 0.013235
+...epoch time: 62.72450923919678s
+...epoch 70: train loss=0.034875946316625925
+...test loss: 0.0350
+---- Epoch 71 ----
+15 210
+15 210
+Train Epoch: 71 [0/100000 (0%)]	Loss: 0.038173
+...epoch time: 61.70000505447388s
+...epoch 71: train loss=0.03484722740986617
+...test loss: 0.0350
+---- Epoch 72 ----
+15 210
+15 210
+Train Epoch: 72 [0/100000 (0%)]	Loss: 0.042786
+...epoch time: 60.526894092559814s
+...epoch 72: train loss=0.03484855758115416
+...test loss: 0.0349
+---- Epoch 73 ----
+15 210
+15 210
+Train Epoch: 73 [0/100000 (0%)]	Loss: 0.056445
+...epoch time: 61.02750015258789s
+...epoch 73: train loss=0.034841148041207345
+...test loss: 0.0349
+---- Epoch 74 ----
+15 210
+15 210
+Train Epoch: 74 [0/100000 (0%)]	Loss: 0.042571
+...epoch time: 61.71298575401306s
+...epoch 74: train loss=0.03486077659385861
+...test loss: 0.0349
+---- Epoch 75 ----
+15 210
+15 210
+Train Epoch: 75 [0/100000 (0%)]	Loss: 0.017923
+...epoch time: 61.11109399795532s
+...epoch 75: train loss=0.034847815435481606
+...test loss: 0.0349
+---- Epoch 76 ----
+15 210
+15 210
+Train Epoch: 76 [0/100000 (0%)]	Loss: 0.032131
+...epoch time: 60.88807773590088s
+...epoch 76: train loss=0.0348154358500801
+...test loss: 0.0349
+---- Epoch 77 ----
+15 210
+15 210
+Train Epoch: 77 [0/100000 (0%)]	Loss: 0.064546
+...epoch time: 60.496395111083984s
+...epoch 77: train loss=0.03483621770525351
+...test loss: 0.0349
+---- Epoch 78 ----
+15 210
+15 210
+Train Epoch: 78 [0/100000 (0%)]	Loss: 0.037502
+...epoch time: 61.3690230846405s
+...epoch 78: train loss=0.03483579033739283
+...test loss: 0.0349
+---- Epoch 79 ----
+15 210
+15 210
+Train Epoch: 79 [0/100000 (0%)]	Loss: 0.036329
+...epoch time: 62.25485897064209s
+...epoch 79: train loss=0.03477116712579853
+...test loss: 0.0349
+---- Epoch 80 ----
+15 210
+15 210
+Train Epoch: 80 [0/100000 (0%)]	Loss: 0.040972
+...epoch time: 63.42012691497803s
+...epoch 80: train loss=0.03479746233493439
+...test loss: 0.0349
+---- Epoch 81 ----
+15 210
+15 210
+Train Epoch: 81 [0/100000 (0%)]	Loss: 0.024158
+...epoch time: 62.274420976638794s
+...epoch 81: train loss=0.034817143482354006
+...test loss: 0.0349
+---- Epoch 82 ----
+15 210
+15 210
+Train Epoch: 82 [0/100000 (0%)]	Loss: 0.015270
+...epoch time: 62.48142409324646s
+...epoch 82: train loss=0.03477061572499806
+...test loss: 0.0349
+---- Epoch 83 ----
+15 210
+15 210
+Train Epoch: 83 [0/100000 (0%)]	Loss: 0.082301
+...epoch time: 63.72794508934021s
+...epoch 83: train loss=0.03477706717621884
+...test loss: 0.0349
+---- Epoch 84 ----
+15 210
+15 210
+Train Epoch: 84 [0/100000 (0%)]	Loss: 0.017792
+...epoch time: 62.205652952194214s
+...epoch 84: train loss=0.03476200676343637
+...test loss: 0.0349
+---- Epoch 85 ----
+15 210
+15 210
+Train Epoch: 85 [0/100000 (0%)]	Loss: 0.041850
+...epoch time: 62.34449100494385s
+...epoch 85: train loss=0.03477958294865442
+...test loss: 0.0349
+---- Epoch 86 ----
+15 210
+15 210
+Train Epoch: 86 [0/100000 (0%)]	Loss: 0.018226
+...epoch time: 62.09909391403198s
+...epoch 86: train loss=0.0347882629482646
+...test loss: 0.0349
+---- Epoch 87 ----
+15 210
+15 210
+Train Epoch: 87 [0/100000 (0%)]	Loss: 0.033406
+...epoch time: 62.223832845687866s
+...epoch 87: train loss=0.03477255256327917
+...test loss: 0.0349
+---- Epoch 88 ----
+15 210
+15 210
+Train Epoch: 88 [0/100000 (0%)]	Loss: 0.071657
+...epoch time: 61.362245082855225s
+...epoch 88: train loss=0.034782132447750774
+...test loss: 0.0349
+---- Epoch 89 ----
+15 210
+15 210
+Train Epoch: 89 [0/100000 (0%)]	Loss: 0.044603
+...epoch time: 63.92731213569641s
+...epoch 89: train loss=0.03480392418402247
+...test loss: 0.0349
+---- Epoch 90 ----
+15 210
+15 210
+Train Epoch: 90 [0/100000 (0%)]	Loss: 0.016734
+...epoch time: 60.68589401245117s
+...epoch 90: train loss=0.03473531077569583
+...test loss: 0.0349
+---- Epoch 91 ----
+15 210
+15 210
+Train Epoch: 91 [0/100000 (0%)]	Loss: 0.075860
+...epoch time: 61.21342706680298s
+...epoch 91: train loss=0.03480099986223038
+...test loss: 0.0349
+---- Epoch 92 ----
+15 210
+15 210
+Train Epoch: 92 [0/100000 (0%)]	Loss: 0.028367
+...epoch time: 61.841267108917236s
+...epoch 92: train loss=0.03479597494360525
+...test loss: 0.0349
+---- Epoch 93 ----
+15 210
+15 210
+Train Epoch: 93 [0/100000 (0%)]	Loss: 0.040512
+...epoch time: 61.876708984375s
+...epoch 93: train loss=0.03483365034391638
+...test loss: 0.0348
+---- Epoch 94 ----
+15 210
+15 210
+Train Epoch: 94 [0/100000 (0%)]	Loss: 0.062283
+...epoch time: 60.819576263427734s
+...epoch 94: train loss=0.03471957454531453
+...test loss: 0.0348
+---- Epoch 95 ----
+15 210
+15 210
+Train Epoch: 95 [0/100000 (0%)]	Loss: 0.025409
+...epoch time: 61.08922100067139s
+...epoch 95: train loss=0.03476633076828904
+...test loss: 0.0349
+---- Epoch 96 ----
+15 210
+15 210
+Train Epoch: 96 [0/100000 (0%)]	Loss: 0.022889
+...epoch time: 61.482324838638306s
+...epoch 96: train loss=0.03474760469396598
+...test loss: 0.0349
+---- Epoch 97 ----
+15 210
+15 210
+Train Epoch: 97 [0/100000 (0%)]	Loss: 0.029249
+...epoch time: 73.37371683120728s
+...epoch 97: train loss=0.03475118717776262
+...test loss: 0.0348
+---- Epoch 98 ----
+15 210
+15 210
+Train Epoch: 98 [0/100000 (0%)]	Loss: 0.039480
+...epoch time: 63.50503087043762s
+...epoch 98: train loss=0.034741479972931553
+...test loss: 0.0349
+---- Epoch 99 ----
+15 210
+15 210
+Train Epoch: 99 [0/100000 (0%)]	Loss: 0.024006
+...epoch time: 62.14937114715576s
+...epoch 99: train loss=0.03472065634205472
+...test loss: 0.0348
+---- Epoch 100 ----
+15 210
+15 210
+Train Epoch: 100 [0/100000 (0%)]	Loss: 0.038560
